@@ -1,0 +1,53 @@
+{
+  "taskTypes": {
+    "blockbreak": {
+      "description": "Break a set amount of blocks.",
+      "configuration": {
+        "amount": {
+          "type": "number",
+          "description": "The amount of blocks to break.",
+          "default": 1,
+          "required": true
+        },
+        "block": {
+          "type": "material-list",
+          "description": "The specific block to break.",
+          "note": "Omitting this value will allow any block to be broken."
+        },
+        "data": {
+          "type": "number",
+          "description": "The data value of the block to break.",
+          "default": 0,
+          "note": "Not required for Minecraft versions 1.13 and above."
+        },
+        "reverse-if-placed": {
+          "type": "boolean",
+          "description": "Whether placing blocks should decrement from the quest progress.",
+          "default": false
+        },
+        "check-coreprotect": {
+          "type": "boolean",
+          "description": "Whether the plugin should query CoreProtect if a block has been recently placed.",
+          "default": false,
+          "note": "This requires the CoreProtect plugin to be installed."
+        },
+        "check-coreprotect-time": {
+          "type": "number",
+          "description": "How long ago (in seconds) the plugin should check with CoreProtect whether a block was placed.",
+          "default": false,
+          "note": "This requires the CoreProtect plugin to be installed."
+        },
+        "check-playerblocktracker": {
+          "type": "boolean",
+          "description": "Whether the plugin should query PlayerBlockTracker if a block has been recently placed.",
+          "default": false,
+          "note": "This requires the PlayerBlockTracker plugin to be installed."
+        },
+        "worlds": {
+          "type": "string-list",
+          "description": "The worlds in which the blocks should be broken."
+        }
+      }
+    }
+  }
+}

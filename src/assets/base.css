@@ -1,0 +1,205 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --c-white: #ffffff;
+  --c-white-soft: #f8f8f8;
+  --c-white-mute: #f2f2f2;
+
+  --c-black: #181818;
+  --c-black-soft: #222222;
+  --c-black-mute: #282828;
+
+  --c-indigo: #2c3e50;
+
+  --c-divider-light-1: rgba(60, 60, 60, 0.2);
+  --c-divider-light-2: rgba(60, 60, 60, 0.4);
+  --c-divider-dark-1: rgba(84, 84, 84, 0.2);
+  --c-divider-dark-2: rgba(84, 84, 84, 0.4);
+
+  --c-text-light-1: #f8f8f8;
+  --c-text-light-2: #a7a7a7;
+  --c-text-dark-1: #181818;
+  --c-text-dark-2: #222222;
+  
+  --c-brand: #8b72f0;
+  --c-brand-light: #a08df5;
+  --c-brand-dark: #7058d1;
+  --c-brand-mute: #866ee755;
+  --c-brand-highlight: #9885e463;
+  
+  --c-true: #2ecc71;
+  --c-false: #e74c3c;
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-background: var(--c-white);
+  --color-background-soft: var(--c-white-soft);
+  --color-background-mute: var(--c-white-mute);
+
+  --color-border: var(--c-divider-light-2);
+  --color-border-soft: var(--c-divider-light-1);
+
+  --color-heading: var(--c-text-dark-1);
+  --color-text: var(--c-text-dark-1);
+  --color-text-mute: var(--c-text-dark-2);
+  --color-text-primary: var(--c-brand-dark);
+
+  --color-primary: var(--c-brand);
+  --color-primary-light: var(--c-brand-light);
+  --color-primary-dark: var(--c-brand-dark);
+  --color-primary-mute: var(--c-brand-mute);
+  
+  --color-hover: var(--c-brand-highlight);
+  
+  --color-true: var(--c-true);
+  --color-false: var(--c-false);
+
+  --section-gap: 160px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--c-black);
+    --color-background-soft: var(--c-black-soft);
+    --color-background-mute: var(--c-black-mute);
+
+    --color-border: var(--c-divider-dark-2);
+    --color-border-soft: var(--c-divider-dark-1);
+
+    --color-heading: var(--c-text-light-1);
+    --color-text: var(--c-text-light-1);
+    --color-text-mute: var(--c-text-light-2);
+  --color-text-primary: var(--c-brand-light);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'Fira Code', monospace;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  transition: border-color 0.5s;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+input:disabled {
+  background: var(--color-background-mute);
+  border-color: var(--color-border);
+  color: var(--color-text-mute);
+  cursor: not-allowed;
+}
+
+fieldset {
+  border: 1px solid var(--color-border);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--color-primary);
+}
+
+.multiselect__input {
+  background: var(--color-background-soft) !important ;
+  color: inherit !important;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, .2) !important;
+  }
+}
+
+.multiselect__tags {
+  background: var(--color-background-soft) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px !important;
+  overflow-y: auto !important;
+}
+
+.multiselect__single {
+  font-family: monospace !important;
+  background: var(--color-background-soft) !important;
+  color: var(--color-text) !important;
+  font-size: 0.8rem !important;
+}
+
+.multiselect__content {
+  font-family: monospace;
+
+  &-wrapper {
+    background: var(--color-background);
+    border: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: 0 -1rem 2rem rgba(0, 0, 0, .1);
+  }
+}
+
+.multiselect__element {
+  &:not(:first-child) {
+    border-top: 1px solid rgba(0, 0, 0, .2);
+  }
+}
+
+.multiselect__option {
+  &--highlight {
+    background: rgba(255, 255, 255, .2);
+
+    &:after {
+      background: rgba(0, 0, 0, .2);
+    }
+  }
+
+  &--selected {
+    background: var(--color-primary);
+    color: white;
+
+    &:after {
+      color: rgba(0, 0, 0, .5);
+    }
+
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "quests": {
+    "example1": {
+      "tasks": {
+        "mining": {
+          "type": "blockbreak",
+          "amount": 30
+        }
+      },
+      "display": {
+        "name": "&cExample I (Single Task)",
+        "lore-normal": [
+          "&cThis category is designed to show you the different",
+          "&cattributes a quest can have.",
+          "",
+          "&7This quest requires you to:",
+          "&7 - Break &f30 blocks&7.",
+          "",
+          "&7Rewards:",
+          "&7 - &f10 &7diamonds."
+        ],
+        "lore-started": [
+          "",
+          "&7Your current progression:",
+          "&7 - &f{mining:progress}&7/30 blocks broken."
+        ],
+        "type": "WOODEN_PICKAXE"
+      },
+      "rewards": [
+        "give {player} diamond 10"
+      ],
+      "placeholders": {
+        "description": "&7Break &f30 blocks &7of any type.",
+        "progress": " &8- &f{mining:progress}&7/30 broken"
+      },
+      "options": {
+        "category": "examples",
+        "repeatable": false,
+        "cooldown": {
+          "enabled": true,
+          "time": 1440
+        },
+        "sort-order": 1
+      }
+    },
+    "example2": {
+      "tasks": {
+        "mining": {
+          "type": "blockbreak",
+          "amount": 100
+        },
+        "building": {
+          "type": "blockplace",
+          "amount": 100
+        }
+      },
+      "display": {
+        "name": "&cExample II (Multiple Tasks)",
+        "lore-normal": [
+          "&cThis category is designed to show you the different",
+          "&cattributes a quest can have. This quest requires",
+          "&cmultiple things to be done, unlike the previous one.",
+          "",
+          "&7This quest requires you to:",
+          "&7 - Break &f100 &7blocks.",
+          "&7 - Place &f100 &7blocks.",
+          "",
+          "&7Rewards:",
+          "&7 - &f15 diamonds&7.",
+          "&7 - &f$50&7 added to your in-game balance."
+        ],
+        "lore-started": [
+          "",
+          "&7Your current progression:",
+          "&7 - &f{mining:progress}&7/100 blocks broken.",
+          "&7 - &f{building:progress}&7/100 blocks placed."
+        ],
+        "type": "GRASS_BLOCK"
+      },
+      "rewards": [
+        "give {player} diamond 15",
+        "eco give {player} 50"
+      ],
+      "placeholders": {
+        "description": "&7Break and place &f100 blocks &7of any type.",
+        "progress": " &8- &f{mining:progress}&7/100 broken, &f{building:progress}&7/100 placed"
+      },
+      "options": {
+        "category": "examples",
+        "requires": [
+          "example1"
+        ],
+        "repeatable": false,
+        "cooldown": {
+          "enabled": true,
+          "time": 1440
+        },
+        "sort-order": 2
+      }
+    },
+    "example3": {
+      "tasks": {
+        "mining": {
+          "type": "blockbreak",
+          "amount": 81,
+          "block": "GOLD_ORE"
+        },
+        "building": {
+          "type": "blockplace",
+          "amount": 9,
+          "block": "GOLD_BLOCK"
+        }
+      },
+      "display": {
+        "name": "&cExample III (Repeatable, 10 minute cooldown)",
+        "lore-normal": [
+          "&cThis category is designed to show you the different",
+          "&cattributes a quest can have. This quest can be replayed",
+          "&cafter a cooldown, unlike the previous one.",
+          "",
+          "&7This quest requires you to:",
+          "&7 - Break &f81 gold ore&7.",
+          "&7 - Place &f9 gold blocks&7.",
+          "",
+          "&7Rewards:",
+          "&7 - &f30 diamonds&7.",
+          "&7 - &f$10&7 added to your in-game balance."
+        ],
+        "lore-started": [
+          "",
+          "&7Your current progression:",
+          "&7 - &f{mining:progress}&7/81 gold ore broken.",
+          "&7 - &f{building:progress}&7/9 gold blocks placed."
+        ],
+        "type": "GOLD_ORE"
+      },
+      "rewards": [
+        "give {player} diamond 30",
+        "eco give {player} 10"
+      ],
+      "placeholders": {
+        "description": "&7Break &f81 gold ore &7and place &f9 gold blocks.",
+        "progress": " &8- &f{mining:progress}&7/81 gold ore, &f{building:progress}&7/9 gold blocks"
+      },
+      "options": {
+        "category": "examples",
+        "requires": [
+          "example2"
+        ],
+        "repeatable": true,
+        "cooldown": {
+          "enabled": true,
+          "time": 10
+        },
+        "sort-order": 3
+      }
+    },
+    "example4": {
+      "tasks": {
+        "mobkilling": {
+          "type": "mobkilling",
+          "amount": 3
+        }
+      },
+      "display": {
+        "name": "&cExample IV (Reward String)",
+        "lore-normal": [
+          "&cThis category is designed to show you the different",
+          "&cattributes a quest can have. This quest has a 'reward string'",
+          "&c(a series of messages sent when a quest is complete),",
+          "&cunlike the previous one.",
+          "",
+          "&7This quest requires you to:",
+          "&7 - Kill &f3 &7mobs.",
+          "",
+          "&7Rewards:",
+          "&7 - &f$50 &7added to your in-game balance.",
+          "&7 - &f1 diamond&7."
+        ],
+        "lore-started": [
+          "",
+          "&7Your current progression:",
+          "&7 - &f{mobkilling:progress}&7/3 mobs killed."
+        ],
+        "type": "STRING"
+      },
+      "startstring": [
+        "&7Upon completion of this quest, you will be rewarded with",
+        " &8* &c$50",
+        " &8* &c1 diamonds"
+      ],
+      "rewards": [
+        "eco give {player} 50",
+        "give {player} diamond 1"
+      ],
+      "placeholders": {
+        "description": "&7Kill &f3 &7mobs.",
+        "progress": " &8- &f{mobkilling:progress}&7/3 mobs"
+      },
+      "rewardstring": [
+        " &8* &c$1000 &7was added to your in-game balance.",
+        " &8* &c1 diamond &7was added to your inventory."
+      ],
+      "options": {
+        "category": "examples",
+        "requires": [
+          "example3"
+        ],
+        "repeatable": true,
+        "cooldown": {
+          "enabled": true,
+          "time": 10
+        },
+        "sort-order": 4
+      }
+    },
+    "example5": {
+      "tasks": {
+        "building": {
+          "type": "blockplace",
+          "amount": 10
+        }
+      },
+      "display": {
+        "name": "&cExample V (Permission)",
+        "lore-normal": [
+          "&cThis category is designed to show you the different",
+          "&cattributes a quest can have. This quest requires",
+          "&ccertain permissions.",
+          "",
+          "&7This quest requires you to:",
+          "&7 - Place &f10 &7blocks.",
+          "",
+          "&7Rewards:",
+          "&7 - &f$10 &7added to your in-game balance."
+        ],
+        "lore-started": [
+          "",
+          "&7Your current progression:",
+          "&7 - &f{building:progress}&7/10 blocks placed."
+        ],
+        "type": "GRASS_BLOCK"
+      },
+      "rewards": [
+        "eco give {player} 10"
+      ],
+      "placeholders": {
+        "description": "&7Place &f10 &7blocks of any type.",
+        "progress": " &8- &f{building:progress}&7/10 blocks"
+      },
+      "options": {
+        "category": "examples",
+        "requires": [
+          "example4"
+        ],
+        "permission-required": true,
+        "repeatable": false,
+        "cooldown": {
+          "enabled": true,
+          "time": 1440
+        },
+        "sort-order": 5
+      }
+    },
+    "example6": {
+      "tasks": {
+        "building": {
+          "type": "blockplace",
+          "amount": 10
+        }
+      },
+      "display": {
+        "name": "&cExample VI (Different category, permissions)",
+        "lore-normal": [
+          "&cThis category is designed to show you the different",
+          "&cattributes a quest can have. This quest requires",
+          "&ccertain permissions.",
+          "",
+          "&7This quest requires you to:",
+          "&7 - Place &f10 &7blocks.",
+          "",
+          "&7Rewards:",
+          "&7 - &f$10 &7added to your in-game balance."
+        ],
+        "lore-started": [
+          "",
+          "&7Your current progression:",
+          "&7 - &f{building:progress}&7/10 blocks placed."
+        ],
+        "type": "GRASS_BLOCK"
+      },
+      "rewards": [
+        "eco give {player} 10"
+      ],
+      "placeholders": {
+        "description": "&7Place &f10 &7blocks of any type.",
+        "progress": " &8- &f{building:progress}&7/10 blocks"
+      },
+      "options": {
+        "category": "permissionexample",
+        "repeatable": false,
+        "cooldown": {
+          "enabled": true,
+          "time": 1440
+        },
+        "sort-order": 1
+      }
+    },
+    "example7": {
+      "tasks": {
+        "building": {
+          "type": "blockplace",
+          "amount": 10,
+          "worlds": [
+            "world"
+          ]
+        }
+      },
+      "display": {
+        "name": "&cExample VII (Different category, world restricted)",
+        "lore-normal": [
+          "&cThis category is designed to show you the different",
+          "&cattributes a quest can have. This quest requires",
+          "&chas a task which requires you to be in a world called 'world'.",
+          "",
+          "&7This quest requires you to:",
+          "&7 - Place &f10 &7blocks.",
+          "",
+          "&7Rewards:",
+          "&7 - &f$10 &7added to your in-game balance."
+        ],
+        "lore-started": [
+          "",
+          "&7Your current progression:",
+          "&7 - &f{building:progress}&7/10 blocks placed."
+        ],
+        "type": "GRASS_BLOCK"
+      },
+      "rewards": [
+        "eco give {player} 10"
+      ],
+      "placeholders": {
+        "description": "&7Place &f10 &7blocks of any type in world &fworld.",
+        "progress": " &8- &f{building:progress}&7/10 blocks"
+      },
+      "options": {
+        "category": "permissionexample",
+        "repeatable": false,
+        "cooldown": {
+          "enabled": true,
+          "time": 1440
+        },
+        "sort-order": 1
+      }
+    }
+  },
+  "categories": {
+    "examples": {
+      "display": {
+        "name": "&cExamples",
+        "lore": [
+          "&cThis category is designed to show you the different",
+          "&cattributes a quest can have."
+        ],
+        "type": "WOODEN_SWORD"
+      }
+    },
+    "permissionexample": {
+      "display": {
+        "name": "&cPermission Example",
+        "lore": [
+          "&7This category is an example of one which",
+          "&7requires a permission to open.",
+          "",
+          "&cIt is highly recommended you read this",
+          "&csection and all the comments so you can",
+          "&cmake the most of this plugin."
+        ],
+        "type": "WATER_BUCKET"
+      },
+      "permission-required": true
+    }
+  }
+}
