@@ -2,7 +2,8 @@
 import { useSessionStore } from '@/stores/session';
 import { computed, ref, toRefs, watch } from 'vue';
 import TrueFalseSwitch from '@/components/Control/TrueFalseSwitch.vue';
-import materials from '@/data/materials.json';
+import ItemStackPicker from '@/components/Control/ItemStackPicker.vue';
+import materials from '@/lib/materials';
 
 const props = defineProps({
   taskType: {
@@ -33,7 +34,9 @@ const currentValue = ref(props.initialValue ||
     ? false
     : (props.type === 'material-list' || props.type === 'string-list'
       ? []
-      : ''
+      : props.type === 'itemstack'
+        ? null
+        : ''
     )));
 
 if (props.initialValue !== currentValue.value) {
@@ -81,6 +84,9 @@ const addValue = (searchQuery: any) => {
         <!-- Data type 'string-list' -->
         <multiselect v-else-if="props.type === 'string-list'" v-model="currentValue" :options="[]" @tag="addValue"
           :multiple="true" :taggable="true" :searchable="true" placeholder="Enter string" />
+        
+        <!-- Data type 'itemstack' -->
+        <ItemStackPicker v-else-if="props.type === 'itemstack'" :value="currentValue" @update="updateValue" />
 
         <div v-if="showDescription || error" id="task-configuration-row-info">
           <p v-if="error" class="error">A value is required.</p>

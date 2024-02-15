@@ -89,6 +89,49 @@
           "description": "The worlds in which the blocks should be broken."
         }
       }
+    },
+    "inventory": {
+      "description": "Obtain a set amount of items.",
+      "configuration": {
+        "amount": {
+          "type": "number",
+          "description": "The amount of items to obtain.",
+          "default": 1,
+          "required": true
+        },
+        "item": {
+          "type": "itemstack",
+          "description": "The specific item to obtain.",
+          "required": true
+        },
+        "data": {
+          "type": "number",
+          "description": "The data value of the item to obtain.",
+          "default": 0,
+          "note": "Not required for Minecraft versions 1.13 and above."
+        },
+        "remove-items-when-complete": {
+          "type": "boolean",
+          "description": "Whether the items should be removed from the player's inventory when the quest is complete.",
+          "default": false,
+          "note": "If allow-partial-completion is true, this will be set to true as well."
+        },
+        "allow-partial-completion": {
+          "type": "boolean",
+          "description": "Whether the quest can be completed with less than the required amount of items.",
+          "default": false,
+          "note": "Setting to true will imply remove-items-when-complete is true as well. If a player obtains any matching item, it will be immediately taken away from them and added towards the quest progress."
+        },
+        "exact-match": {
+          "type": "boolean",
+          "description": "Whether the item must match this item exactly, including lore and enchantments.",
+          "default": false
+        },
+        "worlds": {
+          "type": "string-list",
+          "description": "The worlds in which the items should be obtained."
+        }
+      }
     }
   }
 }

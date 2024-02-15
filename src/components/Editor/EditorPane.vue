@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
 import { computed, ref } from 'vue';
-import { stripColourCodes } from '@/lib/util';
+import { stripColorCodes } from '@/lib/util';
 import QuestOptionsPanel from '@/components/Editor/Quest/QuestOptionsPanel.vue';
 import QuestTasksOptionsPanel from '@/components/Editor/Quest/QuestTasksOptionsPanel.vue';
 import CategoryOptionsPanel from '@/components/Editor/Category/CategoryOptionsPanel.vue';
@@ -70,16 +70,16 @@ const duplicateQuest = (oldId: string, newId: string) => {
         <template v-if="selectedType === 'Quest'">
           <template v-if="categoryFromSelectedQuest">
             <font-awesome-icon class="icon" :icon="['fas', 'fa-folder']"/>
-            {{ stripColourCodes(categoryFromSelectedQuest?.display.name) }} 
+            {{ stripColorCodes(categoryFromSelectedQuest?.display.name) }} 
             <font-awesome-icon class="chevron" :icon="['fas', 'fa-chevron-right']"/>
           </template>
           <font-awesome-icon class="icon" :icon="['far', 'fa-compass']"/>
-          <span class="title">{{ stripColourCodes(selectedName!) }} </span>
+          <span class="title">{{ stripColorCodes(selectedName!) }} </span>
           <code>({{ selectedId }})</code>
         </template>
         <template v-if="selectedType === 'Category'">
           <font-awesome-icon class="icon" :icon="['fas', 'fa-folder']"/>
-          <span class="title">{{ stripColourCodes(selectedName!) }} </span>
+          <span class="title">{{ stripColorCodes(selectedName!) }} </span>
           <code>({{ selectedId }})</code>
         </template>
       </span>

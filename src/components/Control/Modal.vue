@@ -29,6 +29,7 @@ const model = defineModel();
   background-color: rgba(0, 0, 0, 0.5);
   transition: opacity 0.3s;
   display: none;
+  overflow: visible;
 }
 
 .modal-content {
@@ -38,7 +39,7 @@ const model = defineModel();
   width: 100%;
   max-width: 600px;
   max-height: 80%;
-  overflow-y: auto;
+  overflow-y: visible;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }

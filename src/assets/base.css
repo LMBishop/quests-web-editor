@@ -143,6 +143,10 @@ input[type="checkbox"] {
   accent-color: var(--color-primary);
 }
 
+input[type="radio"] {
+  accent-color: var(--color-primary);
+}
+
 .multiselect__input {
   background: var(--color-background-soft) !important ;
   color: inherit !important;

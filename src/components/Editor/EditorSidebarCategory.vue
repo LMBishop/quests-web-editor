@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSessionStore, type EditorCategory } from '@/stores/session';
 import { computed, ref, toRefs } from 'vue';
-import { stripColourCodes } from '@/lib/util';
+import { stripColorCodes } from '@/lib/util';
 import EditorSidebarQuest from '@/components/Editor/EditorSidebarQuest.vue';
 
 const props = defineProps<{
@@ -36,7 +36,7 @@ const selected = computed(() => {
     <span id="category-title" @click="setSelectedCategory">
       <font-awesome-icon @click.stop="expandCategory" class="category-icon" :icon="expanded ? ['fas', 'fa-caret-down'] : ['fas', 'fa-caret-up']"/> 
       <span id="category-name">
-        <span id="category-display-name">{{ stripColourCodes(category.display.name) }}</span> 
+        <span id="category-display-name">{{ stripColorCodes(category.display.name) }}</span> 
         <code id="category-display-id">{{ category.id }}</code> 
       </span>
     </span>

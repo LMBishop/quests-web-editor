@@ -3,36 +3,49 @@ import Modal from '@/components/Control/Modal.vue';
 import Button from '@/components/Control/Button.vue';
 import { computed, ref } from 'vue';
 import { useSessionStore } from '@/stores/session';
+import { validateTaskId } from '@/lib/util';
 
 const model = defineModel();
 
-const emit = defineEmits(['update']);
+const emit = defineEmits(['add']);
 
 const session = useSessionStore();
 
 const props = defineProps({
-  taskId: String,
-  currentTaskType: String,
+  questId: {
+    type: String,
+    required: true,
+  },
 });
 
+const knownTasks = computed(() => session.getQuestById(props.questId)!.tasks);
 const knownTaskTypes = computed(() => session.getKnownTaskTypes());
 
+const newId = ref('');
 const newType = ref('');
 const unknownTaskType = computed(() => !knownTaskTypes.value.includes(newType.value));
-const noChange = computed(() => newType.value === props.currentTaskType);
+const invalidTaskId = computed(() => !validateTaskId(newId.value));
+const duplicateTaskId = computed(() => knownTasks.value[newId.value] !== undefined);
+
 const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(newType.value)?.description);
 </script>
 
 <template>
   <Modal v-model="model">
     <template v-slot:header>
-      <h2>Change the task type of '{{ taskId }}'</h2>
+      <h2>Add new task</h2>
     </template>
 
     <template v-slot:body>
       <div id="body">
         <div class="option-group">
-          <label for="new-type">New type</label>
+          <label for="new-type">Task ID</label>
+          <input id="new-id" name="new-id" type="text" v-model="newId" />
+          <p v-if="invalidTaskId" class="error-text">Invalid task ID.</p>
+          <p v-if="duplicateTaskId" class="error-text">Task ID already exists.</p>
+        </div>
+        <div class="option-group">
+          <label for="new-type">Task type</label>
           <multiselect
             id="new-type"
             v-model="newType"
@@ -40,10 +53,10 @@ const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(ne
             :searchable="true"
             placeholder="Select a new type"
           ></multiselect>
+          <p v-if="unknownTaskType" class="error-text">Invalid task type.</p>
         </div>
-        <p v-if="unknownTaskType" class="error-text">Invalid task type.</p>
         <p v-if="newTypeDescription">{{ newTypeDescription }}</p>
-        <p>Any configured options for this task will be overwritten.</p>
+        <p>A task ID must be unique, alphanumeric, and not contain any spaces.</p>
         <div id="confirm" class="control-group">
           <Button
             :icon="['fas', 'fa-times']"
@@ -53,9 +66,9 @@ const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(ne
           <Button
             type="solid"
             :icon="['fas', 'fa-check']"
-            :label="'Change'"
-            :disabled="unknownTaskType || noChange"
-            @click="emit('update', newType)"
+            :label="'Confirm'"
+            :disabled="unknownTaskType || invalidTaskId || duplicateTaskId"
+            @click="emit('add', newId, newType)"
           ></Button>
         </div>
       </div>

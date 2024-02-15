@@ -65,6 +65,16 @@ const deleteValue = (fieldName: string) => {
 
 const showChangeModal = ref(false);
 
+const updateTaskType = (newType: string) => {
+  sessionStore.getQuestById(props.quest.id)!.tasks[props.taskId].config = {
+    type: newType
+  };
+  showChangeModal.value = false;
+}
+
+const deleteTaskType = (taskId: string) => {
+  delete sessionStore.getQuestById(props.quest.id)!.tasks[taskId];
+}
 </script>
 
 <template>
@@ -87,6 +97,7 @@ const showChangeModal = ref(false);
         <Button
           :icon="['fas', 'fa-trash']"
           :label="'Delete'"
+          @click="deleteTaskType(props.taskId)"
         ></Button>
       </div>
     </div>
@@ -105,7 +116,7 @@ const showChangeModal = ref(false);
       <div v-if="taskDefintion">
         <TaskConfigurationRow 
           v-for="fieldName in [...givenRequiredFields, ...missingFields, ...remainingGivenFields]" 
-          :key="`${quest.id}-${props.taskId}-${fieldName}`" 
+          :key="`${quest.id}-${props.taskId}-${taskType}-${fieldName}`" 
           :required="requiredFields.includes(fieldName)" 
           :configKey="fieldName" 
           :initialValue="taskConfig[fieldName]" 
@@ -130,6 +141,9 @@ const showChangeModal = ref(false);
   <ChangeTaskModal
     v-model="showChangeModal" 
     :taskId="props.taskId"
+    :currentTaskType="taskType"
+    :key="`change-task-${props.taskId}`"
+    @update="updateTaskType"
     />
 </template>
 

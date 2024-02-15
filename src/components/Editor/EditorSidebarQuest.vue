@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSessionStore, type EditorQuest } from '@/stores/session';
 import { computed, toRefs } from 'vue';
-import { stripColourCodes } from '@/lib/util';
+import { stripColorCodes } from '@/lib/util';
 
 const props = defineProps<{
   quest: EditorQuest;
@@ -25,7 +25,7 @@ const selected = computed(() => {
     <span id="quest-title">
       <font-awesome-icon class="quest-icon" :icon="['far', 'fa-compass']"/> 
       <span id="quest-name">
-        <span id="quest-display-name">{{ stripColourCodes(quest.display.name) }}</span> 
+        <span id="quest-display-name">{{ stripColorCodes(quest.display.name) }}</span> 
         <code id="quest-display-id">{{ quest.id }}</code> 
       </span>
     </span>
