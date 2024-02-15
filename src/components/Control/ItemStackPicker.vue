@@ -24,7 +24,7 @@ const isQuestItem = computed(() => {
   return value.value?.['quest-item'] !== undefined;
 });
 const isItemStack = computed(() => {
-  if (typeof value.value !== 'object') {
+  if (typeof value.value !== 'object' || value.value === null) {
     return false;
   }
 
