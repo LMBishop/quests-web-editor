@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   type: {
     type: String,
     required: false,    
@@ -7,11 +7,20 @@ defineProps({
   },
   label: String,
   icon: Array<String>,
+  disabled: Boolean,
 });
+
+const emit = defineEmits(['click']);
+
+const onClick = (event: MouseEvent) => {
+  if (!props.disabled) {
+    emit('click', event);
+  }
+};
 </script>
 
 <template>
-  <a id="button" :class="{text: type === 'text', solid: type === 'solid'}" >
+  <a id="button" :class="{text: type === 'text', solid: type === 'solid', disabled: disabled}" @click.stop="onClick">
     <font-awesome-icon :icon="icon" />
     {{ label }}
   </a>
@@ -31,6 +40,19 @@ defineProps({
   transition: color 0.3s;
   font-weight: 700;
   cursor: pointer;
+  
+  &.disabled {
+    color: var(--color-text-mute);
+    cursor: not-allowed;
+  }
+  
+  &:hover {
+    color: var(--color-primary-dark);
+  }
+  
+  &.disabled:hover {
+    color: var(--color-text-mute);
+  }
 }
 
 .solid {
@@ -41,14 +63,20 @@ defineProps({
   border-radius: 4px;
   font-weight: 700;
   cursor: pointer;
+  
+  &.disabled {
+    background-color: var(--color-border);
+    color: var(--color-text-mute);
+    cursor: not-allowed;
+  }
+  
+  &:hover {
+    background-color: var(--color-primary-dark);
+  }
+  
+  &.disabled:hover {
+    background-color: var(--color-border);
+  }
 }
 
-.text:hover {
-  color: var(--color-primary-dark);
-}
-
-.solid:hover {
-  background-color: var(--color-primary-dark);
-}
-    
 </style>

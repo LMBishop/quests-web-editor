@@ -9,15 +9,17 @@ import CategoryChildrenOptionsPanel from '@/components/Editor/Category/CategoryC
 import Button from '@/components/Control/Button.vue';
 import DeleteQuestModal from '@/components/Editor/Quest/Modal/DeleteQuestModal.vue';
 import RenameQuestModal from '@/components/Editor/Quest/Modal/RenameQuestModal.vue';
+import DuplicateQuestModal from '@/components/Editor/Quest/Modal/DuplicateQuestModal.vue';
 
 const sessionStore = useSessionStore();
 
 const selectedType = computed(() => sessionStore.editor.selected.type);
 const selectedId = computed(() => sessionStore.editor.selected.id);
+
 const selectedName = computed(() => {
-  if (selectedType.value === 'Quest') {
+  if (selectedType.value === 'Quest' && selectedId.value) {
     return sessionStore.getQuestById(selectedId.value)?.display.name;
-  } else if (selectedType.value === 'Category') {
+  } else if (selectedType.value === 'Category' && selectedId.value) {
     return sessionStore.getCategoryById(selectedId.value)?.display.name;
   } else {
     return '';
@@ -25,6 +27,8 @@ const selectedName = computed(() => {
 });
 
 const categoryFromSelectedQuest = computed(() => {
+  if (!selectedId.value || selectedType.value !== 'Quest') return null;
+  
   const quest = sessionStore.getQuestById(selectedId.value);
   if (quest) {
     return sessionStore.getCategoryById(quest.options.category) || null;
@@ -35,6 +39,25 @@ const categoryFromSelectedQuest = computed(() => {
 
 const showDeleteModal = ref(false);
 const showRenameModal = ref(false);
+const showDuplicateModal = ref(false);
+
+const renameQuest = (oldId: string, newId: string) => {
+  sessionStore.changeQuestId(oldId, newId);
+  sessionStore.editor.selected.id = newId;
+  showRenameModal.value = false;
+};
+
+const deleteQuest = (questId: string) => {
+  sessionStore.deleteQuest(questId);
+  sessionStore.setEditorSelected(null, null);
+  showDeleteModal.value = false;
+};
+
+const duplicateQuest = (oldId: string, newId: string) => {
+  sessionStore.duplicateQuest(oldId, newId);
+  sessionStore.editor.selected.id = newId;
+  showDuplicateModal.value = false;
+};
 </script>
 
 <template>
@@ -67,6 +90,12 @@ const showRenameModal = ref(false);
           :label="'YAML'"
         ></Button>
         <Button
+          v-if="selectedType === 'Quest'"
+          :icon="['fas', 'fa-copy']"
+          :label="'Duplicate'"
+          @click="showDuplicateModal = true"
+        ></Button>
+        <Button
           :icon="['fas', 'fa-pen']"
           :label="'Rename'"
           @click="showRenameModal = true"
@@ -75,6 +104,12 @@ const showRenameModal = ref(false);
           :icon="['fas', 'fa-trash']"
           :label="'Delete'"
           @click="showDeleteModal = true"
+        ></Button>
+        <Button
+          type="solid"
+          :disabled="true"
+          :icon="['fas', 'fa-save']"
+          :label="'Save'" 
         ></Button>
       </span>
     </div>    
@@ -89,15 +124,26 @@ const showRenameModal = ref(false);
   </div>
   
   <DeleteQuestModal
-    v-if="selectedType === 'Quest'"
+    v-if="selectedType === 'Quest' && selectedId"
     v-model="showDeleteModal"
+    :key="`delete-quest-${selectedId}`"
     :questId="selectedId"
+    @delete="() => selectedId && deleteQuest(selectedId)"
   /> 
   <RenameQuestModal
-    v-if="selectedType === 'Quest'"
+    v-if="selectedType === 'Quest' && selectedId"
     v-model="showRenameModal"
+    :key="`rename-quest-${selectedId}`"
     :questId="selectedId"
+    @update="newId => selectedId && renameQuest(selectedId, newId)"
   />
+  <DuplicateQuestModal
+    v-if="selectedType === 'Quest' && selectedId"
+    v-model="showDuplicateModal"
+    :key="`duplicate-quest-${selectedId}`"
+    :questId="selectedId"
+    @duplicate="newId => selectedId && duplicateQuest(selectedId, newId)"
+  /> 
 </template>
 
 <style scoped>

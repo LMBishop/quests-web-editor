@@ -3,7 +3,6 @@ import { useSessionStore, type EditorQuest } from '@/stores/session';
 import { computed, ref } from 'vue';
 import EditorOptionsPanel from '@/components/Editor/EditorOptionsPanel.vue';
 import Checkbox from '@/components/Control/Checkbox.vue';
-import DeleteQuestModal from '@/components/Editor/Quest/Modal/DeleteQuestModal.vue';
 
 const props = defineProps<{
   questId: string;
@@ -21,7 +20,6 @@ const knownQuests = computed(() => {
   return sessionStore.session.quests.map((quest) => quest.id);
 });
 
-const showDeleteModal = ref(false);
 </script>
 
 <template>
@@ -124,11 +122,6 @@ const showDeleteModal = ref(false);
       </div>
     </div>
   </EditorOptionsPanel>
-  
-  <DeleteQuestModal
-    v-model="showDeleteModal"
-    :questId="props.questId"
-  /> 
 </template>
 
 <style src="vue-multiselect/dist/vue-multiselect.css" />

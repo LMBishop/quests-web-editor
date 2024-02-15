@@ -81,8 +81,8 @@ export const useSessionStore = defineStore('session', {
     },
     editor: {
       selected: {
-        type: '' as 'Quest' | 'Category',
-        id: '',
+        type: '' as 'Quest' | 'Category' | null,
+        id: '' as string | null,
       }
     }
   }),
@@ -97,12 +97,15 @@ export const useSessionStore = defineStore('session', {
       return this.session.categories
     },
     getQuestById: (state) => (id: string) => {
+      if (!id) return null;
       return state.session.quests.find(quest => quest.id === id)
     },
     getCategoryById: (state) => (id: string) => {
+      if (!id) return null;
       return state.session.categories.find(quest => quest.id === id)
     },
     getQuestsInCategory: (state) => (id: string) => {
+      if (!id) return [];
       return state.session.quests.filter(quest => quest.options.category === id)
     },
     getTaskDefinitions: (state) => {
@@ -138,12 +141,31 @@ export const useSessionStore = defineStore('session', {
     //   })
     //   this.editor.categories = categories;
     // },
-    setEditorSelected(type: 'Quest' | 'Category', id: string) {
+    setEditorSelected(type: 'Quest' | 'Category' | null, id: string | null) {
       this.editor.selected.type = type
       this.editor.selected.id = id
     },
     setTaskDefinitions(definitions: { [key: string]: TaskDefinition }) {
       this.session.taskDefinitions = definitions
+    },
+    changeQuestId(oldId: string, newId: string) {
+      const quest = this.getQuestById(oldId);
+      if (!quest) return;
+      
+      quest.id = newId
+    },
+    deleteQuest(id: string) {
+      const index = this.session.quests.findIndex(quest => quest.id === id)
+      if (index === -1) return;
+      this.session.quests.splice(index, 1)
+    },
+    duplicateQuest(id: string, newQuestId: string) {
+      const quest = this.getQuestById(id);
+      if (!quest) return;
+
+      const newQuest = JSON.parse(JSON.stringify(quest));
+      newQuest.id = newQuestId;
+      this.session.quests.push(newQuest);
     }
   }
 });

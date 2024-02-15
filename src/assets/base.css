@@ -219,3 +219,8 @@ input[type="checkbox"] {
     font-weight: 700;
   }
 }
+
+.error-text {
+  color: var(--color-false);
+  font-size: 0.8rem;
+}

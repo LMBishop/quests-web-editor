@@ -6,7 +6,7 @@ import { useSessionStore } from '@/stores/session';
 
 const model = defineModel();
 
-const emit = defineEmits(['update']);
+const emit = defineEmits(['duplicate']);
 
 const props = defineProps({
   questId: String,
@@ -25,13 +25,13 @@ const isDuplicate = computed(() => {
 <template>
   <Modal v-model="model">
     <template v-slot:header>
-      <h2>Rename quest '{{ questId }}'</h2>
+      <h2>Duplicate '{{ questId }}'</h2>
     </template>
 
     <template v-slot:body>
       <div id="body">
         <div class="option-group">
-          <label for="new-type">New quest ID</label>
+          <label for="new-type">ID of new quest</label>
           <input id="new-type" name="new-type" type="text" v-model="newQuestId" />
         </div>
         <p v-if="isDuplicate" class="error-text">Name is not unique.</p>
@@ -45,9 +45,9 @@ const isDuplicate = computed(() => {
           <Button
             type="solid"
             :icon="['fas', 'fa-check']"
-            :label="'Rename'"
+            :label="'Duplicate'"
             :disabled="isDuplicate"
-            @click="emit('update', newQuestId)"
+            @click="emit('duplicate', newQuestId)"
           ></Button>
         </div>
       </div>
