@@ -28,16 +28,30 @@ const definition = computed(() => {
 
 const { description, note } = toRefs(definition.value);
 const showDescription = ref(false);
-const currentValue = ref(props.initialValue);
+const currentValue = ref(props.initialValue ||
+  (props.type === 'boolean'
+    ? false
+    : (props.type === 'material-list' || props.type === 'string-list'
+      ? []
+      : ''
+    )));
 
-const error = computed(() => currentValue.value === undefined || currentValue.value === null || currentValue.value === '');
+if (props.initialValue !== currentValue.value) {
+  emit('update', currentValue.value);
+}
+
+const error = computed(() => currentValue.value === undefined || currentValue.value === null || currentValue.value === '' || (Array.isArray(currentValue.value) && currentValue.value.length === 0));
 const updateValue = (value: any) => {
   currentValue.value = value;
 };
 
 watch(currentValue, () => {
-  emit('update', currentValue.value); 
+  emit('update', currentValue.value);
 });
+
+const addValue = (searchQuery: any) => {
+  currentValue.value.push(searchQuery);
+};
 
 </script>
 
@@ -51,15 +65,27 @@ watch(currentValue, () => {
     </div>
     <div id="value">
       <div id="value-container">
+        <!-- Data type 'string' -->
         <input v-if="props.type === 'string'" v-model="currentValue" />
+
+        <!-- Data type 'number' -->
         <input v-else-if="props.type === 'number'" type="number" v-model="currentValue" />
+
+        <!-- Data type 'boolean' -->
         <TrueFalseSwitch v-else-if="props.type === 'boolean'" :value="!!currentValue" @update="updateValue" />
-        <multiselect v-else-if="props.type === 'material-list'" :value="currentValue" :options="materials"
-          :multiple="true" :taggable="true" :searchable="true" placeholder="Enter material name"></multiselect>
-      </div>
-      <div v-if="showDescription || error" id="task-configuration-row-info">
-        <p v-if="error" class="error">A value is required.</p>
-        <p>{{ description }} <i>{{ note }}</i></p>
+
+        <!-- Data type 'material-list' -->
+        <multiselect v-else-if="props.type === 'material-list'" v-model="currentValue" 
+          :options="materials" :multiple="true" :taggable="true" :searchable="true" placeholder="Enter material name" />
+        
+        <!-- Data type 'string-list' -->
+        <multiselect v-else-if="props.type === 'string-list'" v-model="currentValue" :options="[]" @tag="addValue"
+          :multiple="true" :taggable="true" :searchable="true" placeholder="Enter string" />
+
+        <div v-if="showDescription || error" id="task-configuration-row-info">
+          <p v-if="error" class="error">A value is required.</p>
+          <p>{{ description }} <i>{{ note }}</i></p>
+        </div>
       </div>
     </div>
   </div>
@@ -91,11 +117,12 @@ watch(currentValue, () => {
       border-right: 1px solid var(--color-border);
       background-color: var(--color-background-soft);
       transition: color 0.3s;
-      
+
       &:hover {
         color: var(--color-false);
       }
     }
+
     #name {
       display: flex;
       align-items: center;
@@ -106,7 +133,7 @@ watch(currentValue, () => {
       font-family: monospace;
       cursor: pointer;
       transition: background-color 0.3s;
-      
+
       &:hover {
         background-color: var(--color-hover);
       }
@@ -117,6 +144,12 @@ watch(currentValue, () => {
     width: 75%;
     background-color: var(--color-background);
     border-left: 1px solid var(--color-border);
+    
+    #value-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
   }
 }
 

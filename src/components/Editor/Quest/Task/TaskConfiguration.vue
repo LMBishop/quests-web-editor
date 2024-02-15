@@ -101,7 +101,7 @@ const deleteValue = (fieldName: string) => {
       <div v-if="taskDefintion">
         <TaskConfigurationRow 
           v-for="fieldName in [...givenRequiredFields, ...missingFields, ...remainingGivenFields]" 
-          :key="fieldName" 
+          :key="`${quest.id}-${props.taskId}-${fieldName}`" 
           :required="requiredFields.includes(fieldName)" 
           :configKey="fieldName" 
           :initialValue="taskConfig[fieldName]" 

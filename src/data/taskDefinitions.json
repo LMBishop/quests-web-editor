@@ -25,6 +25,16 @@
           "description": "Whether placing blocks should decrement from the quest progress.",
           "default": false
         },
+        "allow-negative-progress": {
+          "type": "boolean",
+          "description": "Whether the quest progress can go into the negatives.",
+          "default": false
+        },
+        "allow-silk-touch": {
+          "type": "boolean",
+          "description": "Whether blocks broken with a silk touch pickaxe should count towards the quest progress.",
+          "default": false
+        },
         "check-coreprotect": {
           "type": "boolean",
           "description": "Whether the plugin should query CoreProtect if a block has been recently placed.",
@@ -42,6 +52,37 @@
           "description": "Whether the plugin should query PlayerBlockTracker if a block has been recently placed.",
           "default": false,
           "note": "This requires the PlayerBlockTracker plugin to be installed."
+        },
+        "worlds": {
+          "type": "string-list",
+          "description": "The worlds in which the blocks should be broken."
+        }
+      }
+    },
+    "blockplace": {
+      "description": "Place a set amount of blocks.",
+      "configuration": {
+        "amount": {
+          "type": "number",
+          "description": "The amount of blocks to place.",
+          "default": 1,
+          "required": true
+        },
+        "block": {
+          "type": "material-list",
+          "description": "The specific block to place.",
+          "note": "Omitting this value will allow any block to be place."
+        },
+        "data": {
+          "type": "number",
+          "description": "The data value of the block to place.",
+          "default": 0,
+          "note": "Not required for Minecraft versions 1.13 and above."
+        },
+        "reverse-if-broken": {
+          "type": "boolean",
+          "description": "Whether breaking blocks should decrement from the quest progress.",
+          "default": false
         },
         "worlds": {
           "type": "string-list",
