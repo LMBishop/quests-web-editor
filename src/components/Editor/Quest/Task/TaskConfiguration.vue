@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useSessionStore, type EditorQuest } from '@/stores/session';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import Button from '@/components/Control/Button.vue';
 import TaskConfigurationRow from '@/components/Editor/Quest/Task/TaskConfigurationRow.vue';
+import ChangeTaskModal from './Modal/ChangeTaskModal.vue';
 
 const props = defineProps<{
   taskId: string;
@@ -62,6 +63,8 @@ const deleteValue = (fieldName: string) => {
   delete sessionStore.getQuestById(props.quest.id)!.tasks[props.taskId].config[fieldName];
 };
 
+const showChangeModal = ref(false);
+
 </script>
 
 <template>
@@ -75,10 +78,11 @@ const deleteValue = (fieldName: string) => {
           ({{ taskType }})
         </code>
       </p>
-      <div id="task-controls">
+      <div id="task-controls" class="control-group">
         <Button
           :icon="['fas', 'fa-pen']"
           :label="'Change'"
+          @click="showChangeModal = true"
         ></Button>
         <Button
           :icon="['fas', 'fa-trash']"
@@ -122,6 +126,11 @@ const deleteValue = (fieldName: string) => {
       </div>
     </div>
   </div>
+  
+  <ChangeTaskModal
+    v-model="showChangeModal" 
+    :taskId="props.taskId"
+    />
 </template>
 
 <style scoped>
@@ -162,11 +171,6 @@ const deleteValue = (fieldName: string) => {
         font-size: 0.8em;
         color: var(--color-text-mute);
       }
-    }
-    
-    #task-controls {
-      display: flex;
-      gap: 1rem;
     }
   }
 }

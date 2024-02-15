@@ -203,3 +203,19 @@ input[type="checkbox"] {
 
   }
 }
+
+.control-group {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  
+  label {
+    font-weight: 700;
+  }
+}

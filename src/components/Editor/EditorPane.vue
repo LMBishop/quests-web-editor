@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { stripColourCodes } from '@/lib/util';
 import QuestOptionsPanel from '@/components/Editor/Quest/QuestOptionsPanel.vue';
 import QuestTasksOptionsPanel from '@/components/Editor/Quest/QuestTasksOptionsPanel.vue';
 import CategoryOptionsPanel from '@/components/Editor/Category/CategoryOptionsPanel.vue';
 import CategoryChildrenOptionsPanel from '@/components/Editor/Category/CategoryChildrenOptionsPanel.vue';
 import Button from '@/components/Control/Button.vue';
+import DeleteQuestModal from '@/components/Editor/Quest/Modal/DeleteQuestModal.vue';
+import RenameQuestModal from '@/components/Editor/Quest/Modal/RenameQuestModal.vue';
 
 const sessionStore = useSessionStore();
 
@@ -30,6 +32,9 @@ const categoryFromSelectedQuest = computed(() => {
     return null;
   }
 });
+
+const showDeleteModal = ref(false);
+const showRenameModal = ref(false);
 </script>
 
 <template>
@@ -55,7 +60,7 @@ const categoryFromSelectedQuest = computed(() => {
           <code>({{ selectedId }})</code>
         </template>
       </span>
-      <span id="controls">
+      <span id="controls" class="control-group">
         <Button
           v-if="selectedType === 'Quest'"
           :icon="['fas', 'fa-code']"
@@ -64,10 +69,12 @@ const categoryFromSelectedQuest = computed(() => {
         <Button
           :icon="['fas', 'fa-pen']"
           :label="'Rename'"
+          @click="showRenameModal = true"
         ></Button>
         <Button
           :icon="['fas', 'fa-trash']"
           :label="'Delete'"
+          @click="showDeleteModal = true"
         ></Button>
       </span>
     </div>    
@@ -80,6 +87,17 @@ const categoryFromSelectedQuest = computed(() => {
       <CategoryChildrenOptionsPanel v-if="selectedType === 'Category'" :categoryId="selectedId" />
     </div> 
   </div>
+  
+  <DeleteQuestModal
+    v-if="selectedType === 'Quest'"
+    v-model="showDeleteModal"
+    :questId="selectedId"
+  /> 
+  <RenameQuestModal
+    v-if="selectedType === 'Quest'"
+    v-model="showRenameModal"
+    :questId="selectedId"
+  />
 </template>
 
 <style scoped>
@@ -118,11 +136,6 @@ const categoryFromSelectedQuest = computed(() => {
       font-size: 0.8rem;
       color: var(--color-text-mute);
     }
-  }
-  
-  #controls {
-    display: flex;
-    gap: 1rem;
   }
 }
 
