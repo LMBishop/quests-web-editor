@@ -13,6 +13,7 @@ const { category } = toRefs(props);
 const expanded = ref(true);
 
 const sessionStore = useSessionStore();
+const route = useRoute();
 
 const questsInCategory = computed(() => {
   return sessionStore.getQuestsInCategory(category.value.id);
@@ -23,21 +24,22 @@ const expandCategory = () => {
 };
 
 const setSelectedCategory = () => {
-  sessionStore.setEditorSelected('Category', category.value.id);
+  navigateTo({ path: `/category/${category.value.id}` })
 };
 
 const selected = computed(() => {
-  return sessionStore.editor.selected.type === 'Category' && sessionStore.editor.selected.id === category.value.id;
+  return route.path.startsWith('/category') && route.params.id === category.value.id;
 });
 </script>
 
 <template>
-  <div id="category-container" :class="{selected: selected}">
+  <div id="category-container" :class="{ selected: selected }">
     <span id="category-title" @click="setSelectedCategory">
-      <font-awesome-icon @click.stop="expandCategory" class="category-icon" :icon="expanded ? ['fas', 'fa-caret-down'] : ['fas', 'fa-caret-up']"/> 
+      <font-awesome-icon @click.stop="expandCategory" class="category-icon"
+        :icon="expanded ? ['fas', 'fa-caret-down'] : ['fas', 'fa-caret-up']" />
       <span id="category-name">
-        <span id="category-display-name">{{ stripColorCodes(category.display.name) }}</span> 
-        <code id="category-display-id">{{ category.id }}</code> 
+        <span id="category-display-name">{{ stripColorCodes(category.display.name) }}</span>
+        <code id="category-display-id">{{ category.id }}</code>
       </span>
     </span>
   </div>
@@ -52,19 +54,19 @@ const selected = computed(() => {
   padding: 0.5rem 1rem;
   transition: background-color 0.3s;
   border-bottom: 1px solid var(--color-border-soft);
-  
+
   #category-title {
     display: flex;
     align-items: center;
     margin: 0;
     gap: 1rem;
     font-size: 1.1rem;
-    
+
     #category-name {
       display: flex;
       flex-direction: column;
       align-items: left;
-      
+
       #category-display-id {
         font-size: 0.8rem;
         color: var(--color-text-mute);
@@ -76,7 +78,7 @@ const selected = computed(() => {
 .selected {
   background-color: var(--color-primary-mute);
 }
-    
+
 #quests {
   background-color: var(--color-background-mute);
   border-bottom: 1px solid var(--color-border-soft);

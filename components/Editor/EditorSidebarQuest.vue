@@ -9,24 +9,24 @@ const props = defineProps<{
 
 const { quest } = toRefs(props);
 
-const sessionStore = useSessionStore();
+const route = useRoute();
 
 const setSelectedQuest = () => {
-  sessionStore.setEditorSelected('Quest', quest.value.id);
+  navigateTo({ path: `/quest/${quest.value.id}` })
 };
 
 const selected = computed(() => {
-  return sessionStore.editor.selected.type === 'Quest' && sessionStore.editor.selected.id === quest.value.id;
+  return route.path.startsWith('/quest') && route.params.id === quest.value.id;
 });
 </script>
 
 <template>
-  <div id="quest-container" @click.stop="setSelectedQuest" :class="{selected: selected}">
+  <div id="quest-container" @click.stop="setSelectedQuest" :class="{ selected: selected }">
     <span id="quest-title">
-      <font-awesome-icon class="quest-icon" :icon="['far', 'fa-compass']"/> 
+      <font-awesome-icon class="quest-icon" :icon="['far', 'fa-compass']" />
       <span id="quest-name">
-        <span id="quest-display-name">{{ stripColorCodes(quest.display.name) }}</span> 
-        <code id="quest-display-id">{{ quest.id }}</code> 
+        <span id="quest-display-name">{{ stripColorCodes(quest.display.name) }}</span>
+        <code id="quest-display-id">{{ quest.id }}</code>
       </span>
     </span>
   </div>
@@ -44,12 +44,12 @@ const selected = computed(() => {
     margin: 0;
     gap: 0.5rem;
     font-size: 0.8rem;
-    
+
     #quest-name {
       display: flex;
       flex-direction: column;
       align-items: left;
-      
+
       #quest-display-id {
         font-size: 0.6rem;
         color: var(--color-text-mute);

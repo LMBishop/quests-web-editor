@@ -78,12 +78,6 @@ export const useSessionStore = defineStore('session', {
       quests: [] as EditorQuest[],
       categories: [] as EditorCategory[],
       taskDefinitions: {} as { [key: string]: TaskDefinition },
-    },
-    editor: {
-      selected: {
-        type: '' as 'Quest' | 'Category' | null,
-        id: '' as string | null,
-      }
     }
   }),
   getters: {
@@ -141,10 +135,6 @@ export const useSessionStore = defineStore('session', {
     //   })
     //   this.editor.categories = categories;
     // },
-    setEditorSelected(type: 'Quest' | 'Category' | null, id: string | null) {
-      this.editor.selected.type = type
-      this.editor.selected.id = id
-    },
     setTaskDefinitions(definitions: { [key: string]: TaskDefinition }) {
       this.session.taskDefinitions = definitions
     },
