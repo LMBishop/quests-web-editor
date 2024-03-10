@@ -41,7 +41,7 @@ const addTask = (newId: string, newType: string) => {
     </div>
   </EditorOptionsPanel>
 
-  <AddTaskModal v-if="quest" v-model="showAddTaskModal" :questId="questId" @add="addTask" />
+  <EditorTaskModalCreate v-if="quest" v-model="showAddTaskModal" :questId="questId" @add="addTask" />
 </template>
 
 
