@@ -38,8 +38,8 @@ const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(ne
         <p v-if="newTypeDescription">{{ newTypeDescription }}</p>
         <p>Any configured options for this task will be overwritten.</p>
         <div id="confirm" class="control-group">
-          <Button :icon="['fas', 'fa-times']" :label="'Cancel'" @click="model = false"></Button>
-          <Button type="solid" :icon="['fas', 'fa-check']" :label="'Change'" :disabled="unknownTaskType || noChange"
+          <Button :icon="['fas', 'times']" :label="'Cancel'" @click="model = false"></Button>
+          <Button type="solid" :icon="['fas', 'check']" :label="'Change'" :disabled="unknownTaskType || noChange"
             @click="emit('update', newType)"></Button>
         </div>
       </div>

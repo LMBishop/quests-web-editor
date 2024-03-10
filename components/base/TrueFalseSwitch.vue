@@ -16,8 +16,8 @@ const invert = () => {
 
 <template>
   <div class="switch" @click="invert">
-    <span v-if="value" class="true"><font-awesome-icon :icon="['fas', 'fa-check']" /> True</span>
-    <span v-else class="false"><font-awesome-icon :icon="['fas', 'fa-xmark']" /> False</span>
+    <span v-if="value" class="true"><font-awesome-icon :icon="['fas', 'check']" /> True</span>
+    <span v-else class="false"><font-awesome-icon :icon="['fas', 'xmark']" /> False</span>
   </div>
 </template>
 
@@ -32,12 +32,12 @@ const invert = () => {
   user-select: none;
   transition: background-color 0.3s;
   background-color: var(--color-background-soft);
-  
+
   span {
     font-family: monospace;
     font-size: 0.8rem;
   }
-  
+
   .true {
     color: var(--color-text-primary);
   }
@@ -45,10 +45,9 @@ const invert = () => {
   .false {
     color: var(--color-false);
   }
-  
+
   &:hover {
     background-color: var(--color-hover);
   }
 }
-
 </style>

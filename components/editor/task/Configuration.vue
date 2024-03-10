@@ -86,13 +86,13 @@ const deleteTaskType = (taskId: string) => {
         </code>
       </p>
       <div id="task-controls" class="control-group">
-        <Button :icon="['fas', 'fa-pen']" :label="'Change'" @click="showChangeModal = true"></Button>
-        <Button :icon="['fas', 'fa-trash']" :label="'Delete'" @click="deleteTaskType(props.taskId)"></Button>
+        <Button :icon="['fas', 'pen']" :label="'Change'" @click="showChangeModal = true"></Button>
+        <Button :icon="['fas', 'trash']" :label="'Delete'" @click="deleteTaskType(props.taskId)"></Button>
       </div>
     </div>
     <div id="task-configuration">
       <div v-if="!taskDefintion" class="error">
-        <font-awesome-icon id="error-icon" :icon="['fas', 'fa-triangle-exclamation']" />
+        <font-awesome-icon id="error-icon" :icon="['fas', 'triangle-exclamation']" />
         <p id="error-message">
           Unable to edit task <code>{{ props.taskId }}</code>.
         </p>

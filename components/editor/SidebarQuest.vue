@@ -23,7 +23,7 @@ const selected = computed(() => {
 <template>
   <div id="quest-container" @click.stop="setSelectedQuest" :class="{ selected: selected }">
     <span id="quest-title">
-      <font-awesome-icon class="quest-icon" :icon="['far', 'fa-compass']" />
+      <font-awesome-icon class="quest-icon" :icon="['far', 'compass']" />
       <span id="quest-name">
         <span id="quest-display-name">{{ stripColorCodes(quest.display.name) }}</span>
         <code id="quest-display-id">{{ quest.id }}</code>

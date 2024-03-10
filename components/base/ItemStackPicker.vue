@@ -14,9 +14,9 @@ const showItemStackModal = ref(false);
 
 //TODO unshitify
 const empty = computed(() => {
-  return value.value === undefined 
-    || value.value === null 
-    || value.value === '' 
+  return value.value === undefined
+    || value.value === null
+    || value.value === ''
     || (Array.isArray(value.value) && value.value.length === 0)
     || (typeof value.value === 'object' && Object.keys(value.value).length === 0);
 });
@@ -28,12 +28,12 @@ const isItemStack = computed(() => {
     return false;
   }
 
-  const key = 'item' in value.value 
-    ? 'item' 
-    : 'type' in value.value 
-      ? 'type' 
+  const key = 'item' in value.value
+    ? 'item'
+    : 'type' in value.value
+      ? 'type'
       : 'material'
-  
+
   return (!!value.value[key]);
 });
 const isMaterial = computed(() => {
@@ -50,17 +50,15 @@ const update = (newValue: any) => {
 <template>
   <div class="itemstack" @click="showItemStackModal = true">
     <span v-if="empty" class="empty">ItemStack...</span>
-    <span v-if="isQuestItem" class="item"><font-awesome-icon :icon="['fas', 'fa-tag']" /> Quest Item</span>
-    <span v-if="isItemStack" class="item"><font-awesome-icon :icon="['fas', 'fa-cube']" /> ItemStack of '{{ value.type || value.item || value.material }}'</span>
-    <span v-if="isMaterial" class="item"><font-awesome-icon :icon="['fas', 'fa-apple-whole']" /> {{ value }}</span>
-    <span v-if="!empty && !isQuestItem && !isItemStack && !isMaterial" class="invalid"><font-awesome-icon :icon="['fas', 'fa-triangle-exclamation']" /> Invalid ItemStack</span>
+    <span v-if="isQuestItem" class="item"><font-awesome-icon :icon="['fas', 'tag']" /> Quest Item</span>
+    <span v-if="isItemStack" class="item"><font-awesome-icon :icon="['fas', 'cube']" /> ItemStack of '{{ value.type ||
+    value.item || value.material }}'</span>
+    <span v-if="isMaterial" class="item"><font-awesome-icon :icon="['fas', 'apple-whole']" /> {{ value }}</span>
+    <span v-if="!empty && !isQuestItem && !isItemStack && !isMaterial" class="invalid"><font-awesome-icon
+        :icon="['fas', 'triangle-exclamation']" /> Invalid ItemStack</span>
   </div>
-  
-  <ItemStackModal
-    v-model="showItemStackModal"
-    :value="value"
-    @confirm="update"
-    />
+
+  <ItemStackModal v-model="showItemStackModal" :value="value" @confirm="update" />
 </template>
 
 <style scoped>
@@ -74,12 +72,12 @@ const update = (newValue: any) => {
   user-select: none;
   transition: background-color 0.3s;
   background-color: var(--color-background-soft);
-  
+
   span {
     font-family: monospace;
     font-size: 0.8rem;
   }
-  
+
   .empty {
     color: var(--color-text-mute);
   }
@@ -87,14 +85,13 @@ const update = (newValue: any) => {
   .item {
     color: var(--color-primary);
   }
-  
+
   .invalid {
     color: var(--color-false);
   }
-  
+
   &:hover {
     background-color: var(--color-hover);
   }
 }
-
 </style>

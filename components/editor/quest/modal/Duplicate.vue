@@ -35,8 +35,8 @@ const isDuplicate = computed(() => {
         <p v-if="isDuplicate" class="error-text">Name is not unique.</p>
         <p>A Quest ID must be unique, alphanumeric, and not contain any spaces.</p>
         <div id="confirm" class="control-group">
-          <Button :icon="['fas', 'fa-times']" :label="'Cancel'" @click="model = false"></Button>
-          <Button type="solid" :icon="['fas', 'fa-check']" :label="'Duplicate'" :disabled="isDuplicate"
+          <Button :icon="['fas', 'times']" :label="'Cancel'" @click="model = false"></Button>
+          <Button type="solid" :icon="['fas', 'check']" :label="'Duplicate'" :disabled="isDuplicate"
             @click="emit('duplicate', newQuestId)"></Button>
         </div>
       </div>

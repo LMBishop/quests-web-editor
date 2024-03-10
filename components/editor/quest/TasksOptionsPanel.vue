@@ -36,8 +36,7 @@ const addTask = (newId: string, newType: string) => {
         :quest="quest" />
 
       <div id="controls">
-        <Button id="add-task" :icon="['fas', 'fa-plus']" type="solid" label="Add task"
-          @click="showAddTaskModal = true" />
+        <Button id="add-task" :icon="['fas', 'plus']" type="solid" label="Add task" @click="showAddTaskModal = true" />
       </div>
     </div>
   </EditorOptionsPanel>

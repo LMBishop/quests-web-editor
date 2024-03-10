@@ -35,7 +35,7 @@ const selected = computed(() => {
   <div id="category-container" :class="{ selected: selected }">
     <span id="category-title" @click="setSelectedCategory">
       <font-awesome-icon @click.stop="expandCategory" class="category-icon"
-        :icon="expanded ? ['fas', 'fa-caret-down'] : ['fas', 'fa-caret-up']" />
+        :icon="expanded ? ['fas', 'caret-down'] : ['fas', 'caret-up']" />
       <span id="category-name">
         <span id="category-display-name">{{ stripColorCodes(category.display.name) }}</span>
         <code id="category-display-id">{{ category.id }}</code>

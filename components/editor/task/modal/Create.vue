@@ -51,8 +51,8 @@ const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(ne
         <p v-if="newTypeDescription">{{ newTypeDescription }}</p>
         <p>A task ID must be unique, alphanumeric, and not contain any spaces.</p>
         <div id="confirm" class="control-group">
-          <Button :icon="['fas', 'fa-times']" :label="'Cancel'" @click="model = false"></Button>
-          <Button type="solid" :icon="['fas', 'fa-check']" :label="'Confirm'"
+          <Button :icon="['fas', 'times']" :label="'Cancel'" @click="model = false"></Button>
+          <Button type="solid" :icon="['fas', 'check']" :label="'Confirm'"
             :disabled="unknownTaskType || invalidTaskId || duplicateTaskId"
             @click="emit('add', newId, newType)"></Button>
         </div>

@@ -68,21 +68,21 @@ const confirm = () => {
       <div id="type">
         <span class="option" @click="setSelectedType('questitem')" :class="{ selected: selectedType === 'questitem' }">
           <span>
-            <font-awesome-icon :icon="['fas', 'fa-tag']" />
+            <font-awesome-icon :icon="['fas', 'tag']" />
             Quest Item
           </span>
           <p v-if="noTypeSelected">Re-use a quest item.</p>
         </span>
         <span class="option" @click="setSelectedType('itemstack')" :class="{ selected: selectedType === 'itemstack' }">
           <span>
-            <font-awesome-icon :icon="['fas', 'fa-cube']" />
+            <font-awesome-icon :icon="['fas', 'cube']" />
             ItemStack
           </span>
           <p v-if="noTypeSelected">Define a new item stack.</p>
         </span>
         <span class="option" @click="setSelectedType('material')" :class="{ selected: selectedType === 'material' }">
           <span>
-            <font-awesome-icon :icon="['fas', 'fa-apple-whole']" />
+            <font-awesome-icon :icon="['fas', 'apple-whole']" />
             Material
           </span>
           <p v-if="noTypeSelected">Define a specific item type.</p>
@@ -100,8 +100,8 @@ const confirm = () => {
 
 
       <div id="confirm" class="control-group">
-        <Button :icon="['fas', 'fa-times']" :label="'Cancel'" @click="model = false"></Button>
-        <Button type="solid" :icon="['fas', 'fa-check']" :label="'Confirm'" @click="confirm"></Button>
+        <Button :icon="['fas', 'times']" :label="'Cancel'" @click="model = false"></Button>
+        <Button type="solid" :icon="['fas', 'check']" :label="'Confirm'" @click="confirm"></Button>
         <!-- :disabled="noTypeSelected || noValue" -->
       </div>
     </template>
