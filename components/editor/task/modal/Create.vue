@@ -55,6 +55,8 @@ const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(ne
           <Button type="solid" :icon="['fas', 'check']" :label="'Confirm'"
             :disabled="unknownTaskType || invalidTaskId || duplicateTaskId"
             @click="emit('add', newId, newType)"></Button>
+
+
         </div>
       </div>
     </template>

@@ -60,7 +60,7 @@ const addValue = (searchQuery: any) => {
   <div id="task-configuration-row">
     <div id="key">
       <div id="delete" @click="emit('delete')" v-if="!props.required" class="delete">
-        <font-awesome-icon :icon="['fas', 'fa-xmark']" />
+        <font-awesome-icon :icon="['fas', 'xmark']" />
       </div>
       <p id="name" @click="showDescription = !showDescription">{{ props.configKey }}</p>
     </div>
