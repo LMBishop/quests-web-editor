@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import Modal from '@/components/Control/Modal.vue';
-import Button from '@/components/Control/Button.vue';
 import { computed, ref } from 'vue';
 import materials from '@/lib/materials';
-import ItemStackForm from './ItemStackForm.vue';
 
 const model = defineModel();
 
@@ -21,10 +18,10 @@ const isQuestItem = computed(() => {
 });
 const isItemStack = computed(() => {
   return (
-    typeof value.value === 'object' 
+    typeof value.value === 'object'
     && (
-      value.value?.item !== undefined 
-      || value.value?.type !== undefined 
+      value.value?.item !== undefined
+      || value.value?.type !== undefined
       || value.value?.material !== undefined
     ))
 });
@@ -33,12 +30,12 @@ const isMaterial = computed(() => {
 });
 
 const selectedType = ref(
-  isQuestItem.value 
-    ? 'questitem' 
-    : isItemStack.value 
-      ? 'itemstack' 
-      : isMaterial.value 
-        ? 'material' 
+  isQuestItem.value
+    ? 'questitem'
+    : isItemStack.value
+      ? 'itemstack'
+      : isMaterial.value
+        ? 'material'
         : ''
 );
 
@@ -69,21 +66,21 @@ const confirm = () => {
 
     <template v-slot:body>
       <div id="type">
-        <span class="option" @click="setSelectedType('questitem')" :class="{selected: selectedType === 'questitem'}">
+        <span class="option" @click="setSelectedType('questitem')" :class="{ selected: selectedType === 'questitem' }">
           <span>
             <font-awesome-icon :icon="['fas', 'fa-tag']" />
             Quest Item
           </span>
           <p v-if="noTypeSelected">Re-use a quest item.</p>
         </span>
-        <span class="option" @click="setSelectedType('itemstack')" :class="{selected: selectedType === 'itemstack'}">
+        <span class="option" @click="setSelectedType('itemstack')" :class="{ selected: selectedType === 'itemstack' }">
           <span>
             <font-awesome-icon :icon="['fas', 'fa-cube']" />
             ItemStack
           </span>
           <p v-if="noTypeSelected">Define a new item stack.</p>
         </span>
-        <span class="option" @click="setSelectedType('material')" :class="{selected: selectedType === 'material'}">
+        <span class="option" @click="setSelectedType('material')" :class="{ selected: selectedType === 'material' }">
           <span>
             <font-awesome-icon :icon="['fas', 'fa-apple-whole']" />
             Material
@@ -91,31 +88,21 @@ const confirm = () => {
           <p v-if="noTypeSelected">Define a specific item type.</p>
         </span>
       </div>
-      
+
       <div id="material" class="option-group" v-if="selectedType === 'material'">
         <label for="material">Material</label>
-        <multiselect v-model="value" 
-          :options="materials" :searchable="true" placeholder="Enter material name" />
+        <multiselect v-model="value" :options="materials" :searchable="true" placeholder="Enter material name" />
       </div>
-      
+
       <div id="itemstack" class="option-group" v-if="selectedType === 'itemstack'">
         <ItemStackForm v-model="value" />
       </div>
-      
+
 
       <div id="confirm" class="control-group">
-        <Button
-          :icon="['fas', 'fa-times']"
-          :label="'Cancel'"
-          @click="model = false"
-        ></Button>
-        <Button
-          type="solid"
-          :icon="['fas', 'fa-check']"
-          :label="'Confirm'"
-          @click="confirm"
-        ></Button>
-          <!-- :disabled="noTypeSelected || noValue" -->
+        <Button :icon="['fas', 'fa-times']" :label="'Cancel'" @click="model = false"></Button>
+        <Button type="solid" :icon="['fas', 'fa-check']" :label="'Confirm'" @click="confirm"></Button>
+        <!-- :disabled="noTypeSelected || noValue" -->
       </div>
     </template>
   </Modal>
@@ -134,7 +121,7 @@ const confirm = () => {
   gap: 0.25rem;
   user-select: none;
   margin-bottom: 1rem;
-  
+
   .option {
     border: 1px solid var(--color-border);
     cursor: pointer;
@@ -147,23 +134,23 @@ const confirm = () => {
     padding: 0.5rem;
     background-color: var(--color-background-soft);
     transition: background-color 0.3s;
-    
+
     span {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       font-weight: 700;
     }
-    
+
     p {
       text-align: center;
       font-size: 0.8rem;
     }
-    
+
     &:hover {
       background-color: var(--color-hover);
     }
-    
+
     &.selected {
       background-color: var(--color-primary-mute);
     }

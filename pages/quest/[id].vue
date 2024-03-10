@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
 import { computed, ref } from 'vue';
-import { stripColorCodes } from '@/lib/util';
-import QuestOptionsPanel from '@/components/Editor/Quest/QuestOptionsPanel.vue';
-import QuestTasksOptionsPanel from '@/components/Editor/Quest/QuestTasksOptionsPanel.vue';
-import Button from '@/components/Control/Button.vue';
-import DeleteQuestModal from '@/components/Editor/Quest/Modal/DeleteQuestModal.vue';
-import RenameQuestModal from '@/components/Editor/Quest/Modal/RenameQuestModal.vue';
-import DuplicateQuestModal from '@/components/Editor/Quest/Modal/DuplicateQuestModal.vue';
+import { navigateToEditorPane, stripColorCodes } from '@/lib/util';
 
 definePageMeta({
   layout: 'editor'
@@ -35,19 +29,19 @@ const showDuplicateModal = ref(false);
 
 const renameQuest = (oldId: string, newId: string) => {
   sessionStore.changeQuestId(oldId, newId);
-  sessionStore.editor.selected.id = newId;
+  navigateToEditorPane('quest', newId);
   showRenameModal.value = false;
 };
 
 const deleteQuest = (questId: string) => {
   sessionStore.deleteQuest(questId);
-  sessionStore.setEditorSelected(null, null);
+  navigateToEditorPane(null);
   showDeleteModal.value = false;
 };
 
 const duplicateQuest = (oldId: string, newId: string) => {
   sessionStore.duplicateQuest(oldId, newId);
-  sessionStore.editor.selected.id = newId;
+  navigateToEditorPane('quest', newId);
   showDuplicateModal.value = false;
 };
 </script>
@@ -74,16 +68,16 @@ const duplicateQuest = (oldId: string, newId: string) => {
   </div>
 
   <div id="options-container">
-    <QuestOptionsPanel :questId="questId" />
-    <QuestTasksOptionsPanel :questId="questId" />
+    <EditorQuestOptionsPanel :questId="questId" />
+    <EditorQuestTasksOptionsPanel :questId="questId" />
   </div>
 
-  <DeleteQuestModal v-model="showDeleteModal" :key="`delete-quest-${questId}`" :questId="questId"
+  <EditorQuestModalDelete v-model="showDeleteModal" :key="`delete-quest-${questId}`" :questId="questId"
     @delete="() => questId && deleteQuest(questId)" />
-  <RenameQuestModal v-model="showRenameModal" :key="`rename-quest-${questId}`" :questId="questId"
-    @update="newId => questId && renameQuest(questId, newId)" />
-  <DuplicateQuestModal v-model="showDuplicateModal" :key="`duplicate-quest-${questId}`" :questId="questId"
-    @duplicate="newId => questId && duplicateQuest(questId, newId)" />
+  <EditorQuestModalRename v-model="showRenameModal" :key="`rename-quest-${questId}`" :questId="questId"
+    @update="(newId: any) => questId && renameQuest(questId, newId)" />
+  <EditorQuestModalDuplicate v-model="showDuplicateModal" :key="`duplicate-quest-${questId}`" :questId="questId"
+    @duplicate="(newId: any) => questId && duplicateQuest(questId, newId)" />
 </template>
 
 <style scoped>

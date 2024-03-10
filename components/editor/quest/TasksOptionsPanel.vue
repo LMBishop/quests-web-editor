@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore, type EditorQuest } from '@/stores/session';
 import { computed, ref } from 'vue';
-import EditorOptionsPanel from '@/components/Editor/EditorOptionsPanel.vue';
-import TaskConfiguration from '@/components/Editor/Quest/Task/TaskConfiguration.vue';
-import Button from '@/components/Control/Button.vue';
-import AddTaskModal from './Task/Modal/AddTaskModal.vue';
 
 const props = defineProps<{
   questId: string;
@@ -25,7 +21,7 @@ const addTask = (newId: string, newType: string) => {
       type: newType,
     },
   };
-  
+
   showAddTaskModal.value = false;
 };
 </script>
@@ -34,28 +30,19 @@ const addTask = (newId: string, newType: string) => {
   <EditorOptionsPanel v-if="quest">
     <div id="options">
       <h2>Tasks <code>({{ Object.keys(quest.tasks).length }})</code></h2>
-      
+
       <p v-if="Object.keys(quest.tasks).length === 0" class="error-text">This quest does not have any tasks.</p>
-      <TaskConfiguration v-for="(task, taskId) in quest.tasks" :key="taskId" :taskId="String(taskId)" :quest="quest" />
-      
+      <EditorTaskConfiguration v-for="(task, taskId) in quest.tasks" :key="taskId" :taskId="String(taskId)"
+        :quest="quest" />
+
       <div id="controls">
-        <Button
-          id="add-task"
-          :icon="['fas', 'fa-plus']"
-          type="solid"
-          label="Add task" 
-          @click="showAddTaskModal = true"
-          />
+        <Button id="add-task" :icon="['fas', 'fa-plus']" type="solid" label="Add task"
+          @click="showAddTaskModal = true" />
       </div>
     </div>
   </EditorOptionsPanel>
-  
-  <AddTaskModal
-    v-if="quest"
-    v-model="showAddTaskModal"
-    :questId="questId"
-    @add="addTask"
-  />
+
+  <AddTaskModal v-if="quest" v-model="showAddTaskModal" :questId="questId" @add="addTask" />
 </template>
 
 
@@ -64,7 +51,7 @@ const addTask = (newId: string, newType: string) => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  
+
   #controls {
     display: flex;
     justify-content: flex-end;
@@ -88,11 +75,10 @@ label {
 
 h2 {
   border-bottom: 1px solid var(--color-border);
-  
+
   code {
     font-size: 0.8em;
     color: var(--color-text-mute);
   }
 }
 </style>
-

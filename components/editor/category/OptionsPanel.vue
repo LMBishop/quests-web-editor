@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore, type EditorCategory } from '@/stores/session';
 import { computed } from 'vue';
-import EditorOptionsPanel from '../EditorOptionsPanel.vue';
 
 const props = defineProps<{
   categoryId: string;
@@ -17,9 +16,10 @@ const category = computed(() => {
 <template>
   <EditorOptionsPanel v-if="category">
     <div id="options">
-      <h2>Quests in this category</h2>
-      <p>Drag to reorder.</p>
       <div class="option-group">
+        <Checkbox id="category-permissionrequired" label="Require permission for category"
+          description="Players must have permission to open and start quests in this category."
+          v-model="category.permissionRequired" />
       </div>
     </div>
   </EditorOptionsPanel>
@@ -50,4 +50,3 @@ h2 {
   border-bottom: 1px solid var(--color-border);
 }
 </style>
-

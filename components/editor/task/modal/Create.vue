@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Modal from '@/components/Control/Modal.vue';
-import Button from '@/components/Control/Button.vue';
 import { computed, ref } from 'vue';
 import { useSessionStore } from '@/stores/session';
 import { validateTaskId } from '@/lib/util';
@@ -46,30 +44,17 @@ const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(ne
         </div>
         <div class="option-group">
           <label for="new-type">Task type</label>
-          <multiselect
-            id="new-type"
-            v-model="newType"
-            :options="knownTaskTypes"
-            :searchable="true"
-            placeholder="Select a new type"
-          ></multiselect>
+          <multiselect id="new-type" v-model="newType" :options="knownTaskTypes" :searchable="true"
+            placeholder="Select a new type"></multiselect>
           <p v-if="unknownTaskType" class="error-text">Invalid task type.</p>
         </div>
         <p v-if="newTypeDescription">{{ newTypeDescription }}</p>
         <p>A task ID must be unique, alphanumeric, and not contain any spaces.</p>
         <div id="confirm" class="control-group">
-          <Button
-            :icon="['fas', 'fa-times']"
-            :label="'Cancel'"
-            @click="model = false"
-          ></Button>
-          <Button
-            type="solid"
-            :icon="['fas', 'fa-check']"
-            :label="'Confirm'"
+          <Button :icon="['fas', 'fa-times']" :label="'Cancel'" @click="model = false"></Button>
+          <Button type="solid" :icon="['fas', 'fa-check']" :label="'Confirm'"
             :disabled="unknownTaskType || invalidTaskId || duplicateTaskId"
-            @click="emit('add', newId, newType)"
-          ></Button>
+            @click="emit('add', newId, newType)"></Button>
         </div>
       </div>
     </template>

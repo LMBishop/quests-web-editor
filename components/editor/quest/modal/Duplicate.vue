@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Modal from '@/components/Control/Modal.vue';
-import Button from '@/components/Control/Button.vue';
 import { computed, ref } from 'vue';
 import { useSessionStore } from '@/stores/session';
 
@@ -37,18 +35,9 @@ const isDuplicate = computed(() => {
         <p v-if="isDuplicate" class="error-text">Name is not unique.</p>
         <p>A Quest ID must be unique, alphanumeric, and not contain any spaces.</p>
         <div id="confirm" class="control-group">
-          <Button
-            :icon="['fas', 'fa-times']"
-            :label="'Cancel'"
-            @click="model = false"
-          ></Button>
-          <Button
-            type="solid"
-            :icon="['fas', 'fa-check']"
-            :label="'Duplicate'"
-            :disabled="isDuplicate"
-            @click="emit('duplicate', newQuestId)"
-          ></Button>
+          <Button :icon="['fas', 'fa-times']" :label="'Cancel'" @click="model = false"></Button>
+          <Button type="solid" :icon="['fas', 'fa-check']" :label="'Duplicate'" :disabled="isDuplicate"
+            @click="emit('duplicate', newQuestId)"></Button>
         </div>
       </div>
     </template>

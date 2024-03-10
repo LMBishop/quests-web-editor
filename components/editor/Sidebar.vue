@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
 import { storeToRefs } from 'pinia';
-import EditorSidebarCategory from '@/components/Editor/EditorSidebarCategory.vue';
-import EditorSidebarQuest from '@/components/Editor/EditorSidebarQuest.vue';
 
 const sessionStore = useSessionStore();
 
@@ -12,7 +10,9 @@ const { session } = storeToRefs(sessionStore);
 <template>
   <div id="sidebar-container">
     <EditorSidebarCategory v-for="category in session.categories" :key="category.id" :category="category" />
-    <EditorSidebarQuest v-for="quest in session.quests.filter((q) => (!session.categories.some((c) => c.id === q.options.category)))" :key="quest.id" :quest="quest" />
+    <EditorSidebarQuest
+      v-for="quest in session.quests.filter((q) => (!session.categories.some((c) => c.id === q.options.category)))"
+      :key="quest.id" :quest="quest" />
   </div>
 </template>
 

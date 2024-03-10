@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
 import { computed, ref, toRefs, watch } from 'vue';
-import TrueFalseSwitch from '@/components/Control/TrueFalseSwitch.vue';
-import ItemStackPicker from '@/components/Control/ItemStackPicker.vue';
 import materials from '@/lib/materials';
 
 const props = defineProps({
@@ -78,13 +76,13 @@ const addValue = (searchQuery: any) => {
         <TrueFalseSwitch v-else-if="props.type === 'boolean'" :value="!!currentValue" @update="updateValue" />
 
         <!-- Data type 'material-list' -->
-        <multiselect v-else-if="props.type === 'material-list'" v-model="currentValue" 
-          :options="materials" :multiple="true" :taggable="true" :searchable="true" placeholder="Enter material name" />
-        
+        <multiselect v-else-if="props.type === 'material-list'" v-model="currentValue" :options="materials"
+          :multiple="true" :taggable="true" :searchable="true" placeholder="Enter material name" />
+
         <!-- Data type 'string-list' -->
         <multiselect v-else-if="props.type === 'string-list'" v-model="currentValue" :options="[]" @tag="addValue"
           :multiple="true" :taggable="true" :searchable="true" placeholder="Enter string" />
-        
+
         <!-- Data type 'itemstack' -->
         <ItemStackPicker v-else-if="props.type === 'itemstack'" :value="currentValue" @update="updateValue" />
 
@@ -150,7 +148,7 @@ const addValue = (searchQuery: any) => {
     width: 75%;
     background-color: var(--color-background);
     border-left: 1px solid var(--color-border);
-    
+
     #value-container {
       display: flex;
       flex-direction: column;

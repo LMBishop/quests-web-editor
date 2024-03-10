@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import Modal from '@/components/Control/Modal.vue';
-import Button from '@/components/Control/Button.vue';
-
 const model = defineModel();
 
 const emit = defineEmits(['delete']);
@@ -18,17 +15,8 @@ defineProps({
     </template>
     <p>Are you sure you want to delete this quest? The quests editor does not have undo functionality (yet)! </p>
     <div id="confirm" class="control-group">
-      <Button
-        :icon="['fas', 'fa-times']"
-        :label="'Cancel'"
-        @click="model = false"
-      ></Button>
-      <Button
-        type="solid"
-        :icon="['fas', 'fa-trash']"
-        :label="'Delete'"
-        @click="emit('delete')"
-      ></Button>
+      <Button :icon="['fas', 'fa-times']" :label="'Cancel'" @click="model = false"></Button>
+      <Button type="solid" :icon="['fas', 'fa-trash']" :label="'Delete'" @click="emit('delete')"></Button>
     </div>
   </Modal>
 </template>

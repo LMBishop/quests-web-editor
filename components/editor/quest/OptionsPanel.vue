@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore, type EditorQuest } from '@/stores/session';
 import { computed, ref } from 'vue';
-import EditorOptionsPanel from '@/components/Editor/EditorOptionsPanel.vue';
-import Checkbox from '@/components/Control/Checkbox.vue';
 
 const props = defineProps<{
   questId: string;
@@ -27,24 +25,14 @@ const knownQuests = computed(() => {
     <div id="options">
       <div class="option-group">
         <label for="quest-category">Category</label>
-        <multiselect
-          id="quest-category"
-          v-model="quest.options.category"
-          :options="knownCategories"
-          :searchable="true"
+        <multiselect id="quest-category" v-model="quest.options.category" :options="knownCategories" :searchable="true"
           placeholder="No category"></multiselect>
       </div>
 
       <div class="option-group">
         <label for="quest-requirements">Requirements</label>
-        <multiselect
-          id="quest-requirements"
-          v-model="quest.options.requirements"
-          :options="knownQuests"
-          :searchable="true"
-          :taggable="true"
-          :multiple="true"
-          placeholder="Add requirement"></multiselect>
+        <multiselect id="quest-requirements" v-model="quest.options.requirements" :options="knownQuests"
+          :searchable="true" :taggable="true" :multiple="true" placeholder="Add requirement"></multiselect>
         <p class="description">
           This quest will only be available if the player has completed all of the quests listed above.
         </p>
@@ -140,6 +128,4 @@ const knownQuests = computed(() => {
 h2 {
   border-bottom: 1px solid var(--color-border);
 }
-
 </style>
-

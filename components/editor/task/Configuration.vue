@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore, type EditorQuest } from '@/stores/session';
 import { computed, ref } from 'vue';
-import Button from '@/components/Control/Button.vue';
-import TaskConfigurationRow from '@/components/Editor/Quest/Task/TaskConfigurationRow.vue';
-import ChangeTaskModal from './Modal/ChangeTaskModal.vue';
 
 const props = defineProps<{
   taskId: string;
@@ -82,69 +79,47 @@ const deleteTaskType = (taskId: string) => {
     <div id="task-header">
       <p id="task-id">
         <span id="task-name">
-          {{ props.taskId }}         
+          {{ props.taskId }}
         </span>
         <code>
           ({{ taskType }})
         </code>
       </p>
       <div id="task-controls" class="control-group">
-        <Button
-          :icon="['fas', 'fa-pen']"
-          :label="'Change'"
-          @click="showChangeModal = true"
-        ></Button>
-        <Button
-          :icon="['fas', 'fa-trash']"
-          :label="'Delete'"
-          @click="deleteTaskType(props.taskId)"
-        ></Button>
+        <Button :icon="['fas', 'fa-pen']" :label="'Change'" @click="showChangeModal = true"></Button>
+        <Button :icon="['fas', 'fa-trash']" :label="'Delete'" @click="deleteTaskType(props.taskId)"></Button>
       </div>
     </div>
     <div id="task-configuration">
       <div v-if="!taskDefintion" class="error">
-        <font-awesome-icon id="error-icon" :icon="['fas', 'fa-triangle-exclamation']"/>
+        <font-awesome-icon id="error-icon" :icon="['fas', 'fa-triangle-exclamation']" />
         <p id="error-message">
           Unable to edit task <code>{{ props.taskId }}</code>.
         </p>
         <p id="error-description">
-          The quests web editor does not know how to configure task 
+          The quests web editor does not know how to configure task
           type <code>{{ taskType }}</code> as it has no task definition.
         </p>
       </div>
-      
+
       <div v-if="taskDefintion">
-        <TaskConfigurationRow 
-          v-for="fieldName in [...givenRequiredFields, ...missingFields, ...remainingGivenFields]" 
-          :key="`${quest.id}-${props.taskId}-${taskType}-${fieldName}`" 
-          :required="requiredFields.includes(fieldName)" 
-          :configKey="fieldName" 
-          :initialValue="taskConfig[fieldName]" 
-          :taskType="taskType" 
+        <EditorTaskConfigurationRow
+          v-for="fieldName in [...givenRequiredFields, ...missingFields, ...remainingGivenFields]"
+          :key="`${quest.id}-${props.taskId}-${taskType}-${fieldName}`" :required="requiredFields.includes(fieldName)"
+          :configKey="fieldName" :initialValue="taskConfig[fieldName]" :taskType="taskType"
           :type="(taskDefintion.configuration[fieldName].type as string)"
-          @update="newValue => updateValue(fieldName, newValue)"
-          @delete="() => deleteValue(fieldName)"
-          />
+          @update="(newValue: any) => updateValue(fieldName, newValue)" @delete="() => deleteValue(fieldName)" />
         <div id="add-option">
-          <multiselect
-            class="multiselect"
-            :options="configKeysOptions"
-            :searchable="true"
-            @select="onAddOption"
+          <multiselect class="multiselect" :options="configKeysOptions" :searchable="true" @select="onAddOption"
             placeholder="Add option...">
           </multiselect>
         </div>
       </div>
     </div>
   </div>
-  
-  <ChangeTaskModal
-    v-model="showChangeModal" 
-    :taskId="props.taskId"
-    :currentTaskType="taskType"
-    :key="`change-task-${props.taskId}`"
-    @update="updateTaskType"
-    />
+
+  <EditorTaskModalChange v-model="showChangeModal" :taskId="props.taskId" :currentTaskType="taskType"
+    :key="`change-task-${props.taskId}`" @update="updateTaskType" />
 </template>
 
 <style scoped>
@@ -155,18 +130,18 @@ const deleteTaskType = (taskId: string) => {
     float: left;
     margin: 5px 0 0 -20px;
   }
-  
+
   #error-message {
     font-weight: 700;
   }
-  
+
 }
-  
+
 #task-configuration-table {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--color-border);
-  
+
   #task-header {
     display: flex;
     justify-content: space-between;
@@ -176,7 +151,7 @@ const deleteTaskType = (taskId: string) => {
 
     #task-id {
       font-size: 1.2em;
-      
+
       #task-name {
         font-weight: 700;
       }
@@ -204,6 +179,4 @@ const deleteTaskType = (taskId: string) => {
 .multiselect::v-deep .multiselect__select {
   background: transparent !important;
 }
-
 </style>
-

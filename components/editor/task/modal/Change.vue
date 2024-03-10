@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Modal from '@/components/Control/Modal.vue';
-import Button from '@/components/Control/Button.vue';
 import { computed, ref } from 'vue';
 import { useSessionStore } from '@/stores/session';
 
@@ -33,30 +31,16 @@ const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(ne
       <div id="body">
         <div class="option-group">
           <label for="new-type">New type</label>
-          <multiselect
-            id="new-type"
-            v-model="newType"
-            :options="knownTaskTypes"
-            :searchable="true"
-            placeholder="Select a new type"
-          ></multiselect>
+          <multiselect id="new-type" v-model="newType" :options="knownTaskTypes" :searchable="true"
+            placeholder="Select a new type"></multiselect>
         </div>
         <p v-if="unknownTaskType" class="error-text">Invalid task type.</p>
         <p v-if="newTypeDescription">{{ newTypeDescription }}</p>
         <p>Any configured options for this task will be overwritten.</p>
         <div id="confirm" class="control-group">
-          <Button
-            :icon="['fas', 'fa-times']"
-            :label="'Cancel'"
-            @click="model = false"
-          ></Button>
-          <Button
-            type="solid"
-            :icon="['fas', 'fa-check']"
-            :label="'Change'"
-            :disabled="unknownTaskType || noChange"
-            @click="emit('update', newType)"
-          ></Button>
+          <Button :icon="['fas', 'fa-times']" :label="'Cancel'" @click="model = false"></Button>
+          <Button type="solid" :icon="['fas', 'fa-check']" :label="'Change'" :disabled="unknownTaskType || noChange"
+            @click="emit('update', newType)"></Button>
         </div>
       </div>
     </template>

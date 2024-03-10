@@ -16,3 +16,15 @@ export function validateCategoryId(id: string): boolean {
 export function validateTaskId(id: string): boolean {
   return VALID_ID_REGEX.test(id);
 }
+
+export function navigateToEditorPane(type: 'quest' | 'category' | null, id?: string) {
+  if (id) {
+    if (type === 'category') {
+      navigateTo({ path: '/category/' + id })
+    } else if (type === 'quest') {
+      navigateTo({ path: '/quest/' + id })
+    }
+  } else if (!id && !type) {
+    navigateTo({ path: '/' })
+  }
+}

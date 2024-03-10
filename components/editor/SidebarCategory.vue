@@ -2,7 +2,6 @@
 import { useSessionStore, type EditorCategory } from '@/stores/session';
 import { computed, ref, toRefs } from 'vue';
 import { stripColorCodes } from '@/lib/util';
-import EditorSidebarQuest from '@/components/Editor/EditorSidebarQuest.vue';
 
 const props = defineProps<{
   category: EditorCategory;

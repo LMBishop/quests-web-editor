@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
 import { loadQuestsFromJson, loadCategoriesFromJson } from '@/lib/questsLoader';
-import SiteHeader from '@/components/Header/SiteHeader.vue';
-import EditorSidebar from '@/components/Editor/EditorSidebar.vue';
 import testData from '@/data/testData.json';
 import taskDefinitions from '@/data/taskDefinitions.json';
 

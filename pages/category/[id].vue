@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
 import { stripColorCodes } from '@/lib/util';
-import CategoryOptionsPanel from '@/components/Editor/Category/CategoryOptionsPanel.vue';
-import CategoryChildrenOptionsPanel from '@/components/Editor/Category/CategoryChildrenOptionsPanel.vue';
-import Button from '@/components/Control/Button.vue';
 
 definePageMeta({
   layout: 'editor'
@@ -30,8 +27,8 @@ const categoryName = sessionStore.getCategoryById(categoryId)?.display.name;
   </div>
 
   <div id="options-container">
-    <CategoryOptionsPanel :categoryId="categoryId" />
-    <CategoryChildrenOptionsPanel :categoryId="categoryId" />
+    <EditorCategoryOptionsPanel :categoryId="categoryId" />
+    <EditorCategoryChildrenOptionsPanel :categoryId="categoryId" />
   </div>
 </template>
 
