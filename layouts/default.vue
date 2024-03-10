@@ -5,8 +5,5 @@ import SiteHeader from '@/components/Header/SiteHeader.vue';
 <template>
   <SiteHeader />
 
-  <RouterView />
+  <slot />
 </template>
-
-<style scoped>
-</style>
