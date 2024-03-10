@@ -23,13 +23,13 @@ const requiredFields = computed(() => {
   return Object.keys(taskDefintion.value.configuration).filter((fieldName) => taskDefintion.value.configuration[fieldName].required);
 });
 
-const givenRequiredFields = computed(() => {
-  return requiredFields.value.filter((fieldName) => taskConfig.value[fieldName]);
-});
+// const givenRequiredFields = computed(() => {
+//   return requiredFields.value.filter((fieldName) => taskConfig.value[fieldName]);
+// });
 
-const missingFields = computed(() => {
-  return requiredFields.value.filter((fieldName) => !props.quest.tasks[props.taskId].config[fieldName]);
-});
+// const missingFields = computed(() => {
+//   return requiredFields.value.filter((fieldName) => !props.quest.tasks[props.taskId].config[fieldName]);
+// });
 
 const remainingGivenFields = computed(() => {
   return Object.keys(taskConfig.value).filter((fieldName) => !requiredFields.value.includes(fieldName));
@@ -103,8 +103,7 @@ const deleteTaskType = (taskId: string) => {
       </div>
 
       <div v-if="taskDefintion">
-        <EditorTaskConfigurationRow
-          v-for="fieldName in [...givenRequiredFields, ...missingFields, ...remainingGivenFields]"
+        <EditorTaskConfigurationRow v-for="fieldName in [...requiredFields, ...remainingGivenFields]"
           :key="`${quest.id}-${props.taskId}-${taskType}-${fieldName}`" :required="requiredFields.includes(fieldName)"
           :configKey="fieldName" :initialValue="taskConfig[fieldName]" :taskType="taskType"
           :type="(taskDefintion.configuration[fieldName].type as string)"
