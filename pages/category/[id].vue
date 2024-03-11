@@ -92,7 +92,7 @@ const categoryName = sessionStore.getCategoryById(categoryId)?.display.name;
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  overflow: scroll;
+  overflow: auto;
   max-height: calc(100% - 55px);
 }
 

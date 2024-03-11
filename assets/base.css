@@ -112,7 +112,7 @@ code {
   font-family: 'Fira Code', monospace;
 }
 
-input {
+input, textarea {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -123,16 +123,20 @@ input {
   transition: border-color 0.5s;
 }
 
-input:focus {
+input:focus, textarea:focus {
   outline: none;
   border-color: var(--color-primary);
 }
 
-input:disabled {
+input:disabled, textarea:disabled {
   background: var(--color-background-mute);
   border-color: var(--color-border);
   color: var(--color-text-mute);
   cursor: not-allowed;
+}
+
+a {
+  color: var(--color-primary)
 }
 
 fieldset {

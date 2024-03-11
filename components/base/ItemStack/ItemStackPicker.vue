@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import ItemStackModal from './ItemStackModal.vue';
 import materials from '@/lib/materials';
 
 const props = defineProps<{

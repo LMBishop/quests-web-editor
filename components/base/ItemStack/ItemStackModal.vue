@@ -6,9 +6,9 @@ const model = defineModel();
 
 const emit = defineEmits(['confirm']);
 
-const props = defineProps({
-  value: String,
-});
+const props = defineProps<{
+  value: any
+}>();
 
 //TODO unshitify
 const value = ref<any>(props.value);

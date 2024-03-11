@@ -29,7 +29,7 @@ const setSelectedType = (type: 'quests' | 'items') => {
         </span>
       </span>
     </div>
-    <div id="quests">
+    <div id="quests" v-if="currentType === 'quests'">
       <EditorSidebarCategory v-for="category in session.categories" :key="category.id" :category="category" />
       <EditorSidebarQuest
         v-for="quest in session.quests.filter((q) => (!session.categories.some((c) => c.id === q.options.category)))"
@@ -86,8 +86,8 @@ const setSelectedType = (type: 'quests' | 'items') => {
   }
 
   #quests {
-    max-height: calc(100vh - 73px - 46px);
-    overflow-y: scroll;
+    max-height: calc(100vh - 73px - 46px - 30px);
+    overflow-y: auto;
   }
 
   #configuration-container {
