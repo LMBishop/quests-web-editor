@@ -14,7 +14,7 @@ export interface EditorQuest {
   rewards: string[];
   startCommands?: string[];
   startString?: string[];
-  rewardString?: string[]; 
+  rewardString?: string[];
   placeholders?: { [key: string]: string };
   options: {
     category: string;
@@ -60,6 +60,10 @@ export interface EditorCategory {
 
 export interface TaskDefinition {
   description: string;
+  icon: {
+    style: string;
+    name: string;
+  }
   configuration: {
     [key: string]: {
       type: string | string[];
@@ -141,7 +145,7 @@ export const useSessionStore = defineStore('session', {
     changeQuestId(oldId: string, newId: string) {
       const quest = this.getQuestById(oldId);
       if (!quest) return;
-      
+
       quest.id = newId
     },
     deleteQuest(id: string) {

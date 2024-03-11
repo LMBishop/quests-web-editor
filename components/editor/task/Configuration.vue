@@ -82,7 +82,7 @@ const deleteTaskType = (taskId: string) => {
           {{ props.taskId }}
         </span>
         <code>
-          ({{ taskType }})
+          (<font-awesome-icon v-if="taskDefintion" id="task-icon" :icon="[taskDefintion.icon.style, taskDefintion.icon.name]" />{{ taskType }})
         </code>
       </p>
       <div id="task-controls" class="control-group">
@@ -155,6 +155,10 @@ const deleteTaskType = (taskId: string) => {
         font-weight: 700;
       }
 
+      #task-icon {
+        padding-right: 0.3rem;
+      }
+
       code {
         font-size: 0.8em;
         color: var(--color-text-mute);
@@ -169,13 +173,12 @@ const deleteTaskType = (taskId: string) => {
   border-top: 1px solid var(--color-border);
 }
 
-.multiselect::v-deep .multiselect__tags {
-  border: none !important;
+:deep(.multiselect) .multiselect__tags {
+  border: unset !important;
   border-radius: 0px !important;
-  background: transparent !important;
 }
 
-.multiselect::v-deep .multiselect__select {
-  background: transparent !important;
+:deep(.multiselect) .multiselect__select {
+  background: unset !important;
 }
 </style>

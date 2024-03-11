@@ -2,6 +2,10 @@
   "taskTypes": {
     "blockbreak": {
       "description": "Break a set amount of blocks.",
+      "icon": {
+        "style": "fas",
+        "name": "trowel"
+      },
       "configuration": {
         "amount": {
           "type": "number",
@@ -61,6 +65,10 @@
     },
     "blockplace": {
       "description": "Place a set amount of blocks.",
+      "icon": {
+        "style": "fas",
+        "name": "building-columns"
+      },
       "configuration": {
         "amount": {
           "type": "number",
@@ -92,6 +100,10 @@
     },
     "inventory": {
       "description": "Obtain a set amount of items.",
+      "icon": {
+        "style": "fas",
+        "name": "boxes-stacked"
+      },
       "configuration": {
         "amount": {
           "type": "number",

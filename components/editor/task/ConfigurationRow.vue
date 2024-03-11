@@ -182,12 +182,12 @@ input {
   color: var(--color-false);
 }
 
-.multiselect::v-deep .multiselect__tags {
+:deep(.multiselect) .multiselect__tags {
   border: unset !important;
   border-radius: 0px !important;
 }
 
-.multiselect::v-deep .multiselect__select {
+:deep(.multiselect) .multiselect__select {
   background: unset !important;
 }
 </style>

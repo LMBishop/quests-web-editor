@@ -112,8 +112,6 @@ const knownQuests = computed(() => {
   </EditorOptionsPanel>
 </template>
 
-<style src="vue-multiselect/dist/vue-multiselect.css" />
-
 <style>
 #options {
   display: flex;
