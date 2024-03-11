@@ -92,6 +92,8 @@ const duplicateQuest = (oldId: string, newId: string) => {
   align-items: left;
   justify-content: space-between;
   gap: 1rem;
+  position: relative;
+  z-index: 0;
 
   #path {
     font-size: 1.2rem;

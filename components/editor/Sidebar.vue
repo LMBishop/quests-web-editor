@@ -50,6 +50,8 @@ const setSelectedType = (type: 'quests' | 'items') => {
   background-color: var(--color-background);
   user-select: none;
   position: relative;
+  z-index: 0;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
 
   #selector {
     display: flex;
