@@ -2,7 +2,7 @@
 import { useSessionStore } from '@/stores/session';
 import { computed, ref } from 'vue';
 import { navigateToEditorPane, stripColorCodes } from '@/lib/util';
-import type Yaml from '~/components/editor/quest/modal/Yaml.vue';
+import type EditorQuestModalYaml from '~/components/editor/quest/modal/EditorQuestModalYaml.vue';
 
 definePageMeta({
   layout: 'editor'
@@ -24,7 +24,7 @@ const categoryFromSelectedQuest = computed(() => {
   }
 });
 
-const yamlModal = ref<InstanceType<typeof Yaml> | null>(null);
+const yamlModal = ref<InstanceType<typeof EditorQuestModalYaml> | null>(null);
 const showDeleteModal = ref(false);
 const showRenameModal = ref(false);
 const showDuplicateModal = ref(false);
@@ -53,7 +53,7 @@ const showYaml = () => {
 </script>
 
 <template>
-  <div id="header">
+  <PageHeader>
     <span id="path">
       <template v-if="categoryFromSelectedQuest">
         <font-awesome-icon class="icon" :icon="['fas', 'fa-folder']" />
@@ -71,7 +71,7 @@ const showYaml = () => {
       <Button :icon="['fas', 'fa-trash']" :label="'Delete'" @click="showDeleteModal = true"></Button>
       <Button type="solid" :disabled="true" :icon="['fas', 'fa-save']" :label="'Save'"></Button>
     </span>
-  </div>
+  </PageHeader>
 
   <div id="options-container">
     <EditorQuestOptionsPanel :questId="questId" />
@@ -88,55 +88,6 @@ const showYaml = () => {
 </template>
 
 <style scoped>
-#header {
-  padding: 1rem 1rem 0.5rem 1rem;
-  background-color: var(--color-background);
-  border-bottom: 1px solid var(--color-border);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  height: 55px;
-  display: flex;
-  align-items: left;
-  justify-content: space-between;
-  gap: 1rem;
-  position: relative;
-  z-index: 0;
-
-  #path {
-    font-size: 1.2rem;
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-
-    .icon {
-      font-size: 0.8rem;
-    }
-
-    .chevron {
-      font-size: 0.8rem;
-      color: var(--color-text-mute);
-    }
-
-    .title {
-      font-weight: 700;
-    }
-
-    code {
-      font-size: 0.8rem;
-      color: var(--color-text-mute);
-    }
-  }
-}
-
-.none-selected {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  font-size: 1.2rem;
-  color: var(--color-text-mute);
-}
-
 #pane-container {
   width: 100%;
   flex-grow: 1;

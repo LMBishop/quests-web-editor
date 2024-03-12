@@ -3,12 +3,11 @@ import { computed, ref } from 'vue';
 import materials from '@/lib/materials';
 
 const model = defineModel();
-
 const emit = defineEmits(['confirm']);
-
 const props = defineProps<{
   value: any
 }>();
+const session = useSessionStore();
 
 //TODO unshitify
 const value = ref<any>(props.value);
@@ -41,6 +40,17 @@ const selectedType = ref(
 
 const noTypeSelected = computed(() => selectedType.value === '');
 const noValue = computed(() => !isQuestItem.value && !isItemStack.value && !isMaterial.value);
+
+const selectedQuestItem = computed({
+  get() {
+    return value.value?.['quest-item'];
+  },
+  set(newValue: string) {
+    value.value = {}
+    value.value['quest-item'] = newValue;
+  }
+})
+const knownQuestItems = computed(() => { return session.session.items.map((item) => item.id) });
 
 const setSelectedType = (type: string) => {
   if (type === 'questitem') {
@@ -98,6 +108,11 @@ const confirm = () => {
         <ItemStackForm v-model="value" />
       </div>
 
+      <div id="quest-item" class="option-group" v-if="selectedType === 'questitem'">
+        <label for="quest-item">Quest Item</label>
+        <multiselect v-model="selectedQuestItem" :options="knownQuestItems" :searchable="true"
+          placeholder="Enter quest item" />
+      </div>
 
       <div id="confirm" class="control-group">
         <Button :icon="['fas', 'times']" :label="'Cancel'" @click="model = false"></Button>

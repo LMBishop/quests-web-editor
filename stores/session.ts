@@ -58,6 +58,12 @@ export interface EditorCategory {
   permissionRequired: string;
 }
 
+export interface EditorItem {
+  id: string;
+  type: string;
+  config: any
+}
+
 export interface TaskDefinition {
   description: string;
   icon: {
@@ -75,13 +81,27 @@ export interface TaskDefinition {
   }
 }
 
+export interface QuestItemDefinition {
+  description: string;
+  selectable: boolean;
+  defined: boolean;
+  configuration: {
+    [key: string]: {
+      type: string | string[];
+      description: string;
+    }
+  }
+}
+
 export const useSessionStore = defineStore('session', {
   state: () => ({
     sessionType: '',
     session: {
       quests: [] as EditorQuest[],
       categories: [] as EditorCategory[],
+      items: [] as EditorItem[],
       taskDefinitions: {} as { [key: string]: TaskDefinition },
+      questItemDefinitions: {} as { [key: string]: QuestItemDefinition }
     }
   }),
   getters: {
@@ -94,6 +114,9 @@ export const useSessionStore = defineStore('session', {
     getCategories(): EditorCategory[] {
       return this.session.categories
     },
+    getItems(): EditorItem[] {
+      return this.session.items
+    },
     getQuestById: (state) => (id: string) => {
       if (!id) return null;
       return state.session.quests.find(quest => quest.id === id)
@@ -101,6 +124,10 @@ export const useSessionStore = defineStore('session', {
     getCategoryById: (state) => (id: string) => {
       if (!id) return null;
       return state.session.categories.find(quest => quest.id === id)
+    },
+    getItemById: (state) => (id: string) => {
+      if (!id) return null;
+      return state.session.items.find(item => item.id === id);
     },
     getQuestsInCategory: (state) => (id: string) => {
       if (!id) return [];
@@ -114,10 +141,16 @@ export const useSessionStore = defineStore('session', {
     },
     getKnownTaskTypes: (state) => () => {
       return Object.keys(state.session.taskDefinitions)
+    },
+    getQuestItemDefintions: (state) => {
+      return state.session.questItemDefinitions
+    },
+    getQuestItemDefinitionByTaskType: (state) => (type: string) => {
+      return state.session.questItemDefinitions[type]
+    },
+    getKnownQuestItemTypes: (state) => () => {
+      return Object.keys(state.session.questItemDefinitions)
     }
-    // getEditorCategories: (state) => {
-    //   return state.editor.categories
-    // }
   },
   actions: {
     setSessionType(type: string) {
@@ -129,18 +162,14 @@ export const useSessionStore = defineStore('session', {
     setCategories(categories: EditorCategory[]) {
       this.session.categories = categories
     },
-    // updateEditorCategories() { 
-    //   const categories: { [key: string]: { quests: string[] } } = {}
-    //   this.session.categories.forEach(category => {
-    //     categories[category.id] = { quests: [] }
-    //   })
-    //   this.session.quests.forEach(quest => {
-    //     categories[quest.options.category].quests.push(quest.id)
-    //   })
-    //   this.editor.categories = categories;
-    // },
+    setItems(items: EditorItem[]) {
+      this.session.items = items
+    },
     setTaskDefinitions(definitions: { [key: string]: TaskDefinition }) {
-      this.session.taskDefinitions = definitions
+      this.session.taskDefinitions = definitions;
+    },
+    setQuestItemDefinitions(definitions: { [key: string]: QuestItemDefinition }) {
+      this.session.questItemDefinitions = definitions;
     },
     changeQuestId(oldId: string, newId: string) {
       const quest = this.getQuestById(oldId);

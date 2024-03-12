@@ -49,7 +49,8 @@ const update = (newValue: any) => {
 <template>
   <div class="itemstack" @click="showItemStackModal = true">
     <span v-if="empty" class="empty">ItemStack...</span>
-    <span v-if="isQuestItem" class="item"><font-awesome-icon :icon="['fas', 'tag']" /> Quest Item</span>
+    <span v-if="isQuestItem" class="item"><font-awesome-icon :icon="['fas', 'tag']" /> Quest Item: {{
+    value['quest-item'] }}</span>
     <span v-if="isItemStack" class="item"><font-awesome-icon :icon="['fas', 'cube']" /> ItemStack: {{ value.type ||
     value.item || value.material }}</span>
     <span v-if="isMaterial" class="item"><font-awesome-icon :icon="['fas', 'apple-whole']" /> {{ value }}</span>

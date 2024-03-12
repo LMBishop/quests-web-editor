@@ -380,5 +380,14 @@
       },
       "permission-required": true
     }
+  },
+  "items": {
+    "coolsword": {
+      "type": "defined",
+      "configuration": {
+        "type": "DIAMOND_SWORD",
+        "name": "Super cool sword"
+      }
+    }
   }
 }

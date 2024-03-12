@@ -67,6 +67,18 @@ export function loadCategoriesFromJson(config: any): EditorCategory[] {
   });
 }
 
+export function loadItemsFromJson(config: any): EditorItem[] {
+  return Object.keys(config).map((itemid: any) => {
+    const item = config[itemid];
+
+    return {
+      id: itemid,
+      type: item.type,
+      config: item.config,
+    };
+  });
+}
+
 //TODO don't write fields if they're unchanged
 export function mapJsonQuestToYamlObject(quest: EditorQuest): any {
   return {

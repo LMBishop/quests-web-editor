@@ -24,7 +24,7 @@ const setSelectedType = (type: 'quests' | 'items') => {
       </span>
       <span class="option" @click="setSelectedType('items')" :class="{ selected: currentType === 'items' }">
         <span>
-          <font-awesome-icon :icon="['fas', 'cube']" />
+          <font-awesome-icon :icon="['fas', 'cubes']" />
           Items
         </span>
       </span>
@@ -34,6 +34,13 @@ const setSelectedType = (type: 'quests' | 'items') => {
       <EditorSidebarQuest
         v-for="quest in session.quests.filter((q) => (!session.categories.some((c) => c.id === q.options.category)))"
         :key="quest.id" :quest="quest" />
+      <p id="count">{{ session.quests.length }} quest{{ session.quests.length === 1 ? '' : 's' }}, {{
+        session.categories.length }}
+        categor{{ session.categories.length === 1 ? 'y' : 'ies' }}</p>
+    </div>
+    <div id="items" v-if="currentType === 'items'">
+      <EditorSidebarItem v-for="item in session.items" :key="item.id" :item="item" />
+      <p id="count">{{ session.items.length }} item{{ session.items.length === 1 ? '' : 's' }}</p>
     </div>
     <div id="configuration-container">
       <EditorSidebarMainConfiguration />
@@ -98,6 +105,13 @@ const setSelectedType = (type: 'quests' | 'items') => {
     position: absolute;
     bottom: 0;
     width: 100%
+  }
+
+  #count {
+    margin: 0.5rem 0;
+    font-size: 0.7rem;
+    text-align: center;
+    color: var(--color-text-mute);
   }
 }
 </style>

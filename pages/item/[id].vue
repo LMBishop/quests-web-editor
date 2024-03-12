@@ -9,17 +9,16 @@ definePageMeta({
 const sessionStore = useSessionStore();
 const route = useRoute();
 
-const categoryId = route.params.id as string;
+const itemId = route.params.id as string;
 
-const categoryName = sessionStore.getCategoryById(categoryId)?.display.name;
+const item = sessionStore.getItemById(itemId);
 </script>
 
 <template>
   <PageHeader>
     <span id="path">
-      <font-awesome-icon class="icon" :icon="['fas', 'fa-folder']" />
-      <span class="title" v-if="categoryName">{{ stripColorCodes(categoryName) }} </span>
-      <code>({{ categoryId }})</code>
+      <font-awesome-icon class="icon" :icon="['fas', 'cube']" />
+      <span class="title">{{ itemId }} </span>
     </span>
     <span id="controls" class="control-group">
       <Button type="solid" :disabled="true" :icon="['fas', 'fa-save']" :label="'Save'"></Button>
@@ -27,8 +26,6 @@ const categoryName = sessionStore.getCategoryById(categoryId)?.display.name;
   </PageHeader>
 
   <div id="options-container">
-    <EditorCategoryOptionsPanel :categoryId="categoryId" />
-    <EditorCategoryChildrenOptionsPanel :categoryId="categoryId" />
   </div>
 </template>
 

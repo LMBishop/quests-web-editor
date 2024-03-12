@@ -41,7 +41,7 @@ if (props.initialValue !== currentValue.value) {
   emit('update', currentValue.value);
 }
 
-const error = computed(() => currentValue.value === undefined || currentValue.value === null || currentValue.value === '' || (Array.isArray(currentValue.value) && currentValue.value.length === 0));
+const error = computed(() => currentValue.value === undefined || currentValue.value === null || currentValue.value === '' || (Array.isArray(currentValue.value) && currentValue.value.length === 0) || (typeof currentValue.value === 'object' && Object.keys(currentValue.value).length === 0));
 const updateValue = (value: any) => {
   currentValue.value = value;
 };

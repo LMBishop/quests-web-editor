@@ -1,0 +1,52 @@
+{
+  "questItems": {
+    "raw": {
+      "description": "Items imported from in-game using /q a items import.",
+      "selectable": false
+    },
+    "defined": {
+      "description": "Normal items from Minecraft.",
+      "defined": true
+    },
+    "mmoitems": {
+      "description": "ItemStacks which belong to the MMOItems plugin.",
+      "configuration": {
+        "type": {
+          "type": "string",
+          "description": "The MMOItems type for this item."
+        },
+        "id": {
+          "type": "string",
+          "description": "The MMOItems ID for this item."
+        }
+      }
+    },
+    "slimefun": {
+      "description": "ItemStacks which belong to the Slimefun plugin.",
+      "configuration": {
+        "id": {
+          "type": "string",
+          "description": "The Slimefun item ID for this item."
+        }
+      }
+    },
+    "executableitems": {
+      "description": "ItemStacks which belong to the ExecutableItems plugin.",
+      "configuration": {
+        "id": {
+          "type": "string",
+          "description": "The ExecutableItems ID for this item."
+        }
+      }
+    },
+    "itemsadder": {
+      "description": "ItemStacks which belong to the ItemsAdder plugin.",
+      "configuration": {
+        "id": {
+          "type": "string",
+          "description": "The ItemsAdder ID for this item."
+        }
+      }
+    }
+  }
+}

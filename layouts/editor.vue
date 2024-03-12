@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
-import { loadQuestsFromJson, loadCategoriesFromJson } from '@/lib/questsLoader';
+import { loadQuestsFromJson, loadCategoriesFromJson, loadItemsFromJson } from '@/lib/questsLoader';
 import testData from '@/data/testData.json';
 import taskDefinitions from '@/data/taskDefinitions.json';
 
@@ -8,9 +8,11 @@ const sessionStore = useSessionStore();
 
 const quests = loadQuestsFromJson(testData.quests);
 const categories = loadCategoriesFromJson(testData.categories);
+const items = loadItemsFromJson(testData.items);
 
 sessionStore.setQuests(quests);
 sessionStore.setCategories(categories);
+sessionStore.setItems(items);
 sessionStore.setTaskDefinitions(taskDefinitions.taskTypes);
 // sessionStore.updateEditorCategories();
 </script>
