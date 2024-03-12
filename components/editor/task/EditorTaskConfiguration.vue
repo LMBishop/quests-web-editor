@@ -32,7 +32,7 @@ const requiredFields = computed(() => {
 // });
 
 const remainingGivenFields = computed(() => {
-  return Object.keys(taskConfig.value).filter((fieldName) => !requiredFields.value.includes(fieldName));
+  return Object.keys(taskConfig.value).filter((fieldName) => !requiredFields.value.includes(fieldName) && fieldName in taskDefintion.value.configuration);
 });
 
 const configKeysOptions = computed(() => Object.keys(taskDefintion.value.configuration).filter((key) => !Object.keys(taskConfig.value).some((fieldName) => fieldName === key)));

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore, type EditorQuest } from '@/stores/session';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
   questId: string;

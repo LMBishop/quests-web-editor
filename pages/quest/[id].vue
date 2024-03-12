@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
 import { computed, ref } from 'vue';
-import { navigateToEditorPane, stripColorCodes } from '@/lib/util';
 import type EditorQuestModalYaml from '~/components/editor/quest/modal/EditorQuestModalYaml.vue';
 
 definePageMeta({

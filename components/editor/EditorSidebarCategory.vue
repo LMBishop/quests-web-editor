@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore, type EditorCategory } from '@/stores/session';
 import { computed, ref, toRefs } from 'vue';
-import { stripColorCodes } from '@/lib/util';
 
 const props = defineProps<{
   category: EditorCategory;

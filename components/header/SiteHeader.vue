@@ -1,9 +1,17 @@
+<script setup land="ts">
+</script>
+
 <template>
   <header>
     <div id="nav">
       <img src="@/assets/quests-logo.png" alt="Quests logo" />
       <h1>Quests Web Editor</h1>
       <code>Preview</code>
+    </div>
+
+    <div id="controls">
+      <LoaderTestDataButton />
+      <LoaderFileSystemButton />
     </div>
   </header>
 </template>
@@ -36,11 +44,21 @@
 
 }
 
+#controls {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 header {
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-header);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   position: relative;
   z-index: 1;
+  display: flex;
+  justify-content: space-between;
 }
 </style>

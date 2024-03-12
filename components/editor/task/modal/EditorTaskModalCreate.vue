@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useSessionStore } from '@/stores/session';
-import { validateTaskId } from '@/lib/util';
 
 const model = defineModel();
 

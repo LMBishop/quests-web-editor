@@ -101,6 +101,7 @@ export const useSessionStore = defineStore('session', {
       categories: [] as EditorCategory[],
       items: [] as EditorItem[],
       taskDefinitions: {} as { [key: string]: TaskDefinition },
+      taskTypeAliases: {} as { [key: string]: string },
       questItemDefinitions: {} as { [key: string]: QuestItemDefinition }
     }
   }),
@@ -137,7 +138,7 @@ export const useSessionStore = defineStore('session', {
       return state.session.taskDefinitions
     },
     getTaskDefinitionByTaskType: (state) => (type: string) => {
-      return state.session.taskDefinitions[type]
+      return state.session.taskDefinitions[type] || state.session.taskDefinitions[state.session.taskTypeAliases[type]]
     },
     getKnownTaskTypes: (state) => () => {
       return Object.keys(state.session.taskDefinitions)
@@ -167,6 +168,9 @@ export const useSessionStore = defineStore('session', {
     },
     setTaskDefinitions(definitions: { [key: string]: TaskDefinition }) {
       this.session.taskDefinitions = definitions;
+    },
+    setTaskTypeAliases(taskTypeAliases: { [key: string]: string }) {
+      this.session.taskTypeAliases = taskTypeAliases;
     },
     setQuestItemDefinitions(definitions: { [key: string]: QuestItemDefinition }) {
       this.session.questItemDefinitions = definitions;

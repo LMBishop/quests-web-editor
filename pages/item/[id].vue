@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useSessionStore } from '@/stores/session';
-import { stripColorCodes } from '@/lib/util';
 
 definePageMeta({
   layout: 'editor'

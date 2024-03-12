@@ -47,7 +47,9 @@ const selectedQuestItem = computed({
   },
   set(newValue: string) {
     value.value = {}
-    value.value['quest-item'] = newValue;
+    if (newValue) {
+      value.value['quest-item'] = newValue;
+    }
   }
 })
 const knownQuestItems = computed(() => { return session.session.items.map((item) => item.id) });
@@ -102,6 +104,7 @@ const confirm = () => {
       <div id="material" class="option-group" v-if="selectedType === 'material'">
         <label for="material">Material</label>
         <multiselect v-model="value" :options="materials" :searchable="true" placeholder="Enter material name" />
+        <p>Any items of this material will be matched.</p>
       </div>
 
       <div id="itemstack" class="option-group" v-if="selectedType === 'itemstack'">

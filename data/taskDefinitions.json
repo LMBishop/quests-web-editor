@@ -1,4 +1,8 @@
 {
+  "aliases": {
+    "blockbreakcertain": "blockbreak",
+    "blockplacecertain": "blockplace"
+  },
   "taskTypes": {
     "blockbreak": {
       "description": "Break a set amount of blocks.",
