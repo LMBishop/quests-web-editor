@@ -2,6 +2,7 @@
 import { useSessionStore } from '@/stores/session';
 import { computed, ref } from 'vue';
 import { navigateToEditorPane, stripColorCodes } from '@/lib/util';
+import type Yaml from '~/components/editor/quest/modal/Yaml.vue';
 
 definePageMeta({
   layout: 'editor'
@@ -23,6 +24,7 @@ const categoryFromSelectedQuest = computed(() => {
   }
 });
 
+const yamlModal = ref<InstanceType<typeof Yaml> | null>(null);
 const showDeleteModal = ref(false);
 const showRenameModal = ref(false);
 const showDuplicateModal = ref(false);
@@ -44,6 +46,10 @@ const duplicateQuest = (oldId: string, newId: string) => {
   navigateToEditorPane('quest', newId);
   showDuplicateModal.value = false;
 };
+
+const showYaml = () => {
+  yamlModal.value?.open();
+}
 </script>
 
 <template>
@@ -59,7 +65,7 @@ const duplicateQuest = (oldId: string, newId: string) => {
       <code>({{ questId }})</code>
     </span>
     <span id="controls" class="control-group">
-      <Button :icon="['fas', 'fa-code']" :label="'YAML'"></Button>
+      <Button :icon="['fas', 'fa-code']" :label="'YAML'" @click="showYaml"></Button>
       <Button :icon="['fas', 'fa-copy']" :label="'Duplicate'" @click="showDuplicateModal = true"></Button>
       <Button :icon="['fas', 'fa-pen']" :label="'Rename'" @click="showRenameModal = true"></Button>
       <Button :icon="['fas', 'fa-trash']" :label="'Delete'" @click="showDeleteModal = true"></Button>
@@ -72,6 +78,7 @@ const duplicateQuest = (oldId: string, newId: string) => {
     <EditorQuestTasksOptionsPanel :questId="questId" />
   </div>
 
+  <EditorQuestModalYaml ref="yamlModal" :key="`yaml-quest-${questId}`" :questId="questId" />
   <EditorQuestModalDelete v-model="showDeleteModal" :key="`delete-quest-${questId}`" :questId="questId"
     @delete="() => questId && deleteQuest(questId)" />
   <EditorQuestModalRename v-model="showRenameModal" :key="`rename-quest-${questId}`" :questId="questId"

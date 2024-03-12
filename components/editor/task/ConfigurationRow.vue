@@ -76,12 +76,13 @@ const addValue = (searchQuery: any) => {
         <TrueFalseSwitch v-else-if="props.type === 'boolean'" :value="!!currentValue" @update="updateValue" />
 
         <!-- Data type 'material-list' -->
-        <multiselect v-else-if="props.type === 'material-list'" v-model="currentValue" :options="materials"
-          :multiple="true" :taggable="true" :searchable="true" placeholder="Enter material name" />
+        <multiselect v-else-if="props.type === 'material-list'" v-model="currentValue" class="configuration-multiselect"
+          :options="materials" :multiple="true" :taggable="true" :searchable="true" placeholder="Enter material name" />
 
         <!-- Data type 'string-list' -->
-        <multiselect v-else-if="props.type === 'string-list'" v-model="currentValue" :options="[]" @tag="addValue"
-          :multiple="true" :taggable="true" :searchable="true" placeholder="Enter string" />
+        <multiselect v-else-if="props.type === 'string-list'" v-model="currentValue" class="configuration-multiselect"
+          :options="[]" @tag="addValue" :multiple="true" :taggable="true" :searchable="true"
+          placeholder="Enter string" />
 
         <!-- Data type 'itemstack' -->
         <ItemStackPicker v-else-if="props.type === 'itemstack'" :value="currentValue" @update="updateValue" />
@@ -180,14 +181,5 @@ input {
 
 .error {
   color: var(--color-false);
-}
-
-:deep(.multiselect) .multiselect__tags {
-  border: unset !important;
-  border-radius: 0px !important;
-}
-
-:deep(.multiselect) .multiselect__select {
-  background: unset !important;
 }
 </style>

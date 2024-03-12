@@ -66,3 +66,45 @@ export function loadCategoriesFromJson(config: any): EditorCategory[] {
     };
   });
 }
+
+//TODO don't write fields if they're unchanged
+export function mapJsonQuestToYamlObject(quest: EditorQuest): any {
+  return {
+    tasks: Object.fromEntries(Object.keys(quest.tasks).map((taskId: string) => {
+      return [taskId, quest.tasks[taskId].config]
+    })),
+    display: {
+      name: quest.display.name,
+      "lore-normal": quest.display.lore.normal,
+      "lore-started": quest.display.lore.started,
+      type: quest.display.type
+    },
+    rewards: quest.rewards,
+    ...(quest.startCommands && { startcommands: quest.startCommands }),
+    ...(quest.startString && { startstring: quest.startString }),
+    ...(quest.rewardString && { rewardstring: quest.rewardString }),
+    ...(quest.placeholders && { placeholders: quest.placeholders }),
+    options: {
+      category: quest.options.category,
+      requires: quest.options.requirements,
+      "permission-required": quest.options.permissionRequired,
+      cancellable: quest.options.cancellable,
+      "counts-towards-limit": quest.options.countsTowardsLimit,
+      repeatable: quest.options.repeatable,
+      cooldown: {
+        enabled: quest.options.cooldown.enabled,
+        time: quest.options.cooldown.time,
+      },
+      "time-limit": {
+        enabled: quest.options.timeLimit.enabled,
+        time: quest.options.timeLimit.time,
+      },
+      "sort-order": quest.options.sortOrder,
+      autostart: quest.options.autostart || false,
+      ...(quest.options.completedDisplay && { completedDisplay: quest.options.completedDisplay }),
+      ...(quest.options.cooldownDisplay && { cooldownDisplay: quest.options.cooldownDisplay }),
+      ...(quest.options.permissionDisplay && { permissionDisplay: quest.options.permissionDisplay }),
+      ...(quest.options.lockedDisplay && { lockedDisplay: quest.options.lockedDisplay }),
+    },
+  }
+}

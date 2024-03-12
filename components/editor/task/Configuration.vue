@@ -109,8 +109,8 @@ const deleteTaskType = (taskId: string) => {
           :type="(taskDefintion.configuration[fieldName].type as string)"
           @update="(newValue: any) => updateValue(fieldName, newValue)" @delete="() => deleteValue(fieldName)" />
         <div id="add-option">
-          <multiselect class="multiselect" :options="configKeysOptions" :searchable="true" @select="onAddOption"
-            placeholder="Add option...">
+          <multiselect class="configuration-multiselect" :options="configKeysOptions" :searchable="true"
+            @select="onAddOption" placeholder="Add option...">
           </multiselect>
         </div>
       </div>
@@ -173,12 +173,12 @@ const deleteTaskType = (taskId: string) => {
   border-top: 1px solid var(--color-border);
 }
 
-:deep(.multiselect) .multiselect__tags {
+:deep(.configuration-multiselect) .multiselect__tags {
   border: unset !important;
   border-radius: 0px !important;
 }
 
-:deep(.multiselect) .multiselect__select {
+:deep(.configuration-multiselect) .multiselect__select {
   background: unset !important;
 }
 </style>
