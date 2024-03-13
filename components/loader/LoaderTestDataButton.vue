@@ -10,7 +10,7 @@ const openTestDataModal = async () => {
 
 <template>
   <ClientOnly>
-    <Button :icon="['fas', 'flask-vial']" label="Demo" @click="openTestDataModal" />
+    <Button type="solid" :icon="['fas', 'flask-vial']" label="Demo" @click="openTestDataModal" />
 
     <LoaderTestDataModal ref="testDataModal" />
   </ClientOnly>

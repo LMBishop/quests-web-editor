@@ -108,8 +108,8 @@ export const useSessionStore = defineStore('session', {
     }
   }),
   getters: {
-    getSessionType(): string {
-      return this.sessionType
+    getSessionType: (state) => () => {
+      return state.sessionType
     },
     getQuests(): EditorQuest[] {
       return this.session.quests

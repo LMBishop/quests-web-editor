@@ -28,7 +28,9 @@
   --c-brand-highlight: #9885e463;
   
   --c-true: #2ecc71;
+  --c-true-dark: #279e59;
   --c-false: #e74c3c;
+  --c-false-dark: #912e23;
 }
 
 /* semantic color variables for this project */
@@ -58,7 +60,9 @@
   --color-hover: var(--c-brand-highlight);
   
   --color-true: var(--c-true);
+  --color-true-hover: var(--c-true-dark);
   --color-false: var(--c-false);
+  --color-false-hover: var(--c-false-dark);
 
   --section-gap: 160px;
   

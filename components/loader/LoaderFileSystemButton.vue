@@ -32,7 +32,7 @@ const openFileSystemPrompt = async () => {
 
 <template>
   <ClientOnly>
-    <Button type="solid" :icon="['fas', 'folder-open']" label="Import from Filesystem" @click="openFileSystemPrompt"
+    <Button type="solid" :icon="['fas', 'folder-open']" label="Load" @click="openFileSystemPrompt"
       :disabled="!canUseFsApi" />
 
     <LoaderFileSystemModal ref="fileSystemModal" />

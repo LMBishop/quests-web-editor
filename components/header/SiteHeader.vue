@@ -15,8 +15,7 @@ const navigateHome = () => {
     </div>
 
     <div id="controls">
-      <LoaderTestDataButton />
-      <LoaderFileSystemButton />
+      <LoaderImportButton />
     </div>
   </header>
 </template>
