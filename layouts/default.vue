@@ -14,8 +14,8 @@
 <style scoped>
 #content {
   display: flex;
-  height: calc(100vh - 114px);
-  max-height: calc(100vh - 114px);
+  height: calc(100vh - 104px);
+  max-height: calc(100vh - 104px);
   overflow-y: auto;
   flex-direction: row;
 }

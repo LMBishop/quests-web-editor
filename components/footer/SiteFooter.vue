@@ -6,7 +6,7 @@ const runtimeConfig = useRuntimeConfig();
 <template>
   <footer id="footer">
     <p id="copyright-license">
-
+      Released under the GPL-3.0 License.
     </p>
     <p id="git-commit-hash">
       <font-awesome-icon :icon="['fas', 'code-branch']" />
@@ -24,12 +24,19 @@ const runtimeConfig = useRuntimeConfig();
 
 <style lang="scss" scoped>
 #footer {
-  max-height: 40px;
-  padding: 0.5rem;
+  height: 30px;
+  max-height: 30px;
   border-top: 1px solid var(--color-border-soft);
   display: flex;
   width: 100%;
   justify-content: space-between;
+  font-size: 0.8rem;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+#copyright-license {
+  color: var(--color-text-mute);
 }
 
 #git-commit-hash {
@@ -37,7 +44,6 @@ const runtimeConfig = useRuntimeConfig();
   color: var(--color-text-mute);
   align-items: center;
   gap: 0.3rem;
-  align-self: flex-end;
 
   a {
     text-decoration: none;

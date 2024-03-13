@@ -27,8 +27,8 @@ sessionStore.setTaskTypeAliases(taskDefinitions.aliases);
 #editor-container {
   display: flex;
   background-color: var(--color-background-soft);
-  height: calc(100vh - 114px);
-  max-height: calc(100vh - 114px);
+  height: calc(100vh - 104px);
+  max-height: calc(100vh - 104px);
   flex-direction: row;
 }
 

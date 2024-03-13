@@ -28,7 +28,6 @@ const selected = computed(() => {
   cursor: pointer;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s;
-  border-bottom: 1px solid var(--color-border-soft);
   max-height: 45px;
   overflow-y: hidden;
 
