@@ -19,13 +19,16 @@ sessionStore.setTaskTypeAliases(taskDefinitions.aliases);
       <slot />
     </div>
   </div>
+
+  <SiteFooter />
 </template>
 
 <style lang="scss" scoped>
 #editor-container {
   display: flex;
   background-color: var(--color-background-soft);
-  max-height: calc(100vh - 73px);
+  height: calc(100vh - 114px);
+  max-height: calc(100vh - 114px);
   flex-direction: row;
 }
 

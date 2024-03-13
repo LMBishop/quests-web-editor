@@ -52,8 +52,8 @@ const setSelectedType = (type: 'quests' | 'items') => {
 #sidebar-container {
   width: 20rem;
   border-right: 1px solid var(--color-border);
-  height: calc(100vh - 73px);
-  max-height: calc(100vh - 73px);
+  height: 100%;
+  max-height: 100%;
   background-color: var(--color-background);
   user-select: none;
   position: relative;
@@ -94,8 +94,9 @@ const setSelectedType = (type: 'quests' | 'items') => {
     }
   }
 
-  #quests {
-    max-height: calc(100vh - 73px - 46px - 30px);
+  #quests,
+  #items {
+    max-height: calc(100% - 46px - 30px);
     overflow-y: auto;
   }
 

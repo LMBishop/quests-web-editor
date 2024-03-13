@@ -32,13 +32,6 @@ const categoryName = sessionStore.getCategoryById(categoryId)?.display.name;
 </template>
 
 <style scoped>
-#pane-container {
-  width: 100%;
-  flex-grow: 1;
-  height: calc(100vh - 73px);
-  max-height: calc(100vh - 73px);
-}
-
 #options-container {
   width: 100%;
   display: flex;
