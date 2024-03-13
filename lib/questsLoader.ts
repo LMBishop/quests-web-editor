@@ -1,4 +1,4 @@
-import type { EditorQuest, EditorTask, EditorCategory } from '../stores/session';
+import type { EditorQuest, EditorTask, EditorCategory, EditorItem } from '../stores/session';
 
 export function loadQuestsFromJson(config: any): EditorQuest[] {
   return Object.keys(config).map((questid: any) => {
@@ -74,7 +74,7 @@ export function loadItemsFromJson(config: any): EditorItem[] {
     return {
       id: itemid,
       type: item.type,
-      config: item.config,
+      config: item.item,
     };
   });
 }
@@ -118,5 +118,23 @@ export function mapJsonQuestToYamlObject(quest: EditorQuest): any {
       ...(quest.options.permissionDisplay && { permissionDisplay: quest.options.permissionDisplay }),
       ...(quest.options.lockedDisplay && { lockedDisplay: quest.options.lockedDisplay }),
     },
+  }
+}
+
+export function mapJsonCategoryToYamlObject(category: EditorCategory): any {
+  return {
+    display: {
+      name: category.display.name,
+      type: category.display.type,
+      lore: category.display.lore,
+    },
+    "permission-required": category.permissionRequired,
+  }
+}
+
+export function mapJsonItemToYamlObject(item: EditorItem): any {
+  return {
+    type: item.type,
+    item: item.config
   }
 }

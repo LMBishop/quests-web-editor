@@ -37,6 +37,10 @@ const discardSessionModal = ref<InstanceType<typeof LoaderDiscardSessionModal> |
           <div id="description">
             <p id="subtitle">Retrieve from In-Game</p>
             <p>Download quest data uploaded from in-game.</p>
+            <p class="error">
+              <font-awesome-icon :icon="['fas', 'xmark']" />
+              Not yet implemented.
+            </p>
           </div>
 
           <div id="button-group">

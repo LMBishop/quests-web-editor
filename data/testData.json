@@ -384,7 +384,7 @@
   "items": {
     "coolsword": {
       "type": "defined",
-      "configuration": {
+      "item": {
         "type": "DIAMOND_SWORD",
         "name": "Super cool sword"
       }

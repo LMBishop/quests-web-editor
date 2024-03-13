@@ -111,14 +111,14 @@ export const useSessionStore = defineStore('session', {
     getSessionType: (state) => () => {
       return state.sessionType
     },
-    getQuests(): EditorQuest[] {
-      return this.session.quests
+    getQuests: (state) => () => {
+      return state.session.quests
     },
-    getCategories(): EditorCategory[] {
-      return this.session.categories
+    getCategories: (state) => () => {
+      return state.session.categories
     },
-    getItems(): EditorItem[] {
-      return this.session.items
+    getItems: (state) => () => {
+      return state.session.items
     },
     getQuestById: (state) => (id: string) => {
       if (!id) return null;

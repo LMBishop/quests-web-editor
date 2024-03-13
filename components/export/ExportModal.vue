@@ -41,6 +41,10 @@ defineExpose({
               <font-awesome-icon :icon="['fas', 'xmark']" />
               You did not start this session by importing from file system.
             </p>
+            <p class="error" v-if="canUseFsApi && isUsingFsMode">
+              <font-awesome-icon :icon="['fas', 'xmark']" />
+              Not yet implemented.
+            </p>
           </div>
 
           <div id="button-group">
@@ -55,6 +59,10 @@ defineExpose({
           <div id="description">
             <p id="subtitle">Send to Server</p>
             <p>Upload your quest configuration to the server, which can be downloaded and automatically applied in-game.
+            </p>
+            <p class="error">
+              <font-awesome-icon :icon="['fas', 'xmark']" />
+              Not yet implemented.
             </p>
           </div>
 
@@ -73,7 +81,7 @@ defineExpose({
           </div>
 
           <div id="button-group">
-            <Button type="solid" label="Continue" :disabled="true" />
+            <ExportZipButton />
           </div>
         </div>
       </div>
