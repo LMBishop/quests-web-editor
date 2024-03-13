@@ -4,17 +4,19 @@ export function stripColorCodes(str: string): string {
   return str.replace(COLOR_CODE_REGEX, '');
 }
 
-export function navigateToEditorPane(type: 'quest' | 'category' | 'item' | null, id?: string) {
+export function navigateToEditorPane(type: 'quest' | 'category' | 'item' | 'config' | null, id?: string) {
   if (id) {
     if (type === 'category') {
-      navigateTo({ path: '/category/' + id })
+      navigateTo({ path: '/editor/category/' + id })
     } else if (type === 'quest') {
-      navigateTo({ path: '/quest/' + id })
+      navigateTo({ path: '/editor/quest/' + id })
     } else if (type === 'item') {
-      navigateTo({ path: '/item/' + id })
+      navigateTo({ path: '/editor/item/' + id })
     }
+  } else if (type === 'config') {
+    navigateTo({ path: '/editor/config' })
   } else if (!id && !type) {
-    navigateTo({ path: '/' })
+    navigateTo({ path: '/editor' })
   }
 }
 

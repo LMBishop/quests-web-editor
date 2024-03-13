@@ -10,11 +10,11 @@ const { item } = toRefs(props);
 const route = useRoute();
 
 const setSelectedItem = () => {
-  navigateTo({ path: `/item/${item.value.id}` })
+  navigateToEditorPane('item', item.value.id);
 };
 
 const selected = computed(() => {
-  return route.path.startsWith('/item') && route.params.id === item.value.id;
+  return route.path.startsWith('/editor/item') && route.params.id === item.value.id;
 });
 </script>
 

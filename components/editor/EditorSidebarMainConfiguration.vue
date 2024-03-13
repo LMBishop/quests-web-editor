@@ -4,11 +4,11 @@ import { computed } from 'vue';
 const route = useRoute();
 
 const setSelected = () => {
-  navigateTo({ path: '/config' })
+  navigateToEditorPane('config');
 };
 
 const selected = computed(() => {
-  return route.path.startsWith('/config');
+  return route.path.startsWith('/editor/config');
 });
 </script>
 

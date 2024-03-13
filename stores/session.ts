@@ -93,9 +93,11 @@ export interface QuestItemDefinition {
   }
 }
 
+export type SessionType = 'none' | 'filesystem' | 'demo';
+
 export const useSessionStore = defineStore('session', {
   state: () => ({
-    sessionType: '',
+    sessionType: 'none' as SessionType,
     session: {
       quests: [] as EditorQuest[],
       categories: [] as EditorCategory[],
@@ -154,7 +156,7 @@ export const useSessionStore = defineStore('session', {
     }
   },
   actions: {
-    setSessionType(type: string) {
+    setSessionType(type: SessionType) {
       this.sessionType = type
     },
     setQuests(quests: EditorQuest[]) {

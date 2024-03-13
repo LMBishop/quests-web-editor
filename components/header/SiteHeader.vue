@@ -1,11 +1,16 @@
 <script setup land="ts">
+const navigateHome = () => {
+  navigateTo('/');
+}
 </script>
 
 <template>
   <header>
     <div id="nav">
-      <img src="@/assets/quests-logo.png" alt="Quests logo" />
-      <h1>Quests Web Editor</h1>
+      <span id="logo" @click="navigateHome">
+        <img src="@/assets/quests-logo.png" alt="Quests logo" />
+        <h1>Quests Web Editor</h1>
+      </span>
       <code>Preview</code>
     </div>
 
@@ -42,6 +47,15 @@
     color: var(--color-header-text-mute);
   }
 
+}
+
+#logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  color: var(--color-header-text);
 }
 
 #controls {

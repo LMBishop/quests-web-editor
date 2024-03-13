@@ -22,11 +22,11 @@ const expandCategory = () => {
 };
 
 const setSelectedCategory = () => {
-  navigateTo({ path: `/category/${category.value.id}` })
+  navigateToEditorPane('category', category.value.id);
 };
 
 const selected = computed(() => {
-  return route.path.startsWith('/category') && route.params.id === category.value.id;
+  return route.path.startsWith('/editor/category') && route.params.id === category.value.id;
 });
 </script>
 

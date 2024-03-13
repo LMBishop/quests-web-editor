@@ -16,6 +16,9 @@ const confirm = () => {
   session.setCategories(categories);
   session.setQuests(quests);
   session.setItems(items);
+  session.setSessionType('filesystem');
+
+  navigateToEditorPane(null);
 
   showModal.value = false;
 }

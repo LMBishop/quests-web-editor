@@ -18,6 +18,9 @@ const confirm = () => {
   session.setQuests(quests);
   session.setCategories(categories);
   session.setItems(items);
+  session.setSessionType('demo');
+
+  navigateToEditorPane(null);
 
   showModal.value = false;
 }

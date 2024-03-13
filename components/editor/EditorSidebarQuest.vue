@@ -11,7 +11,7 @@ const { quest } = toRefs(props);
 const route = useRoute();
 
 const setSelectedQuest = () => {
-  navigateTo({ path: `/quest/${quest.value.id}` })
+  navigateToEditorPane('quest', quest.value.id);
 };
 
 const selected = computed(() => {

@@ -66,7 +66,7 @@
   --ff-monospace: monospace;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) { */
   :root {
     --color-background: var(--c-black);
     --color-background-soft: var(--c-black-soft);
@@ -84,7 +84,7 @@
     --color-text-mute: var(--c-text-light-2);
     --color-text-primary: var(--c-brand-light);
   }
-}
+/* } */
 
 *,
 *::before,
