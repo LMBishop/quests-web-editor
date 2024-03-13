@@ -14,8 +14,8 @@ const discardSessionModal = ref<InstanceType<typeof LoaderDiscardSessionModal> |
 </script>
 
 <template>
-  <div id="welcome-container">
-    <div id="welcome">
+  <div id="import-container">
+    <div id="import">
       <b id="title">Import quest data</b>
       <p>Use one of the options below to load quest configuration data.</p>
       <div id="import-options">
@@ -72,7 +72,7 @@ const discardSessionModal = ref<InstanceType<typeof LoaderDiscardSessionModal> |
 </template>
 
 <style lang="scss" scoped>
-#welcome-container {
+#import-container {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -112,7 +112,7 @@ const discardSessionModal = ref<InstanceType<typeof LoaderDiscardSessionModal> |
   color: var(--color-false);
 }
 
-#welcome {
+#import {
   display: flex;
   flex-direction: column;
   margin: 3rem 0;

@@ -1,7 +1,11 @@
 <script setup land="ts">
+const session = useSessionStore();
+
 const navigateHome = () => {
   navigateTo('/');
 }
+
+const sessionType = computed(() => session.getSessionType());
 </script>
 
 <template>
@@ -14,8 +18,12 @@ const navigateHome = () => {
       <code>Preview</code>
     </div>
 
-    <div id="controls">
+    <div id="controls" v-if="sessionType === 'none'">
+      <LoaderImportButton :isPrimaryAction="true" />
+    </div>
+    <div id="controls" v-if="sessionType !== 'none'">
       <LoaderImportButton />
+      <ExportButton />
     </div>
   </header>
 </template>

@@ -62,7 +62,11 @@ const model = defineModel();
 }
 
 .header {
-  border-bottom: 1px solid var(--color-border);
   margin-bottom: 1rem;
+}
+
+:deep(.header) h2 {
+  font-weight: 600;
+  border-bottom: none;
 }
 </style>
