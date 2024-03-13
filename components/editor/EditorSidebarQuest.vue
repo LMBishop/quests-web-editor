@@ -15,7 +15,7 @@ const setSelectedQuest = () => {
 };
 
 const selected = computed(() => {
-  return route.path.startsWith('/quest') && route.params.id === quest.value.id;
+  return route.path.startsWith('/editor/quest') && route.params.id === quest.value.id;
 });
 </script>
 
