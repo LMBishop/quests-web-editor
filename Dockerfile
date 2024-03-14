@@ -1,5 +1,9 @@
 FROM node:20-slim as base
 
+RUN apt-get update && \
+  apt-get install -y git && \
+  apt-get clean
+
 ENV NODE_ENV=production
 
 WORKDIR /src
