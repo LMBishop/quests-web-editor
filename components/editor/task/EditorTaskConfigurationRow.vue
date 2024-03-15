@@ -21,27 +21,37 @@ const emit = defineEmits(['update', 'delete']);
 const sessionStore = useSessionStore();
 
 const definition = computed(() => {
-  const def = sessionStore.getTaskDefinitionByTaskType(props.taskType).configuration[props.configKey];
+  const def = sessionStore.getTaskDefinitionByTaskType(props.taskType).configuration[
+    props.configKey
+  ];
   return { description: def.description, note: def.note };
 });
 
 const { description, note } = toRefs(definition.value);
 const showDescription = ref(false);
-const currentValue = ref(props.initialValue ||
-  (props.type === 'boolean'
-    ? false
-    : (props.type === 'material-list' || props.type === 'string-list'
-      ? []
-      : props.type === 'itemstack'
-        ? null
-        : ''
-    )));
+const currentValue = ref(
+  props.initialValue ||
+    (props.type === 'boolean'
+      ? false
+      : props.type === 'material-list' || props.type === 'string-list'
+        ? []
+        : props.type === 'itemstack'
+          ? null
+          : '')
+);
 
 if (props.initialValue !== currentValue.value) {
   emit('update', currentValue.value);
 }
 
-const error = computed(() => currentValue.value === undefined || currentValue.value === null || currentValue.value === '' || (Array.isArray(currentValue.value) && currentValue.value.length === 0) || (typeof currentValue.value === 'object' && Object.keys(currentValue.value).length === 0));
+const error = computed(
+  () =>
+    currentValue.value === undefined ||
+    currentValue.value === null ||
+    currentValue.value === '' ||
+    (Array.isArray(currentValue.value) && currentValue.value.length === 0) ||
+    (typeof currentValue.value === 'object' && Object.keys(currentValue.value).length === 0)
+);
 const updateValue = (value: any) => {
   currentValue.value = value;
 };
@@ -53,7 +63,6 @@ watch(currentValue, () => {
 const addValue = (searchQuery: any) => {
   currentValue.value.push(searchQuery);
 };
-
 </script>
 
 <template>
@@ -73,23 +82,49 @@ const addValue = (searchQuery: any) => {
         <input v-else-if="props.type === 'number'" type="number" v-model="currentValue" />
 
         <!-- Data type 'boolean' -->
-        <TrueFalseSwitch v-else-if="props.type === 'boolean'" :value="!!currentValue" @update="updateValue" />
+        <TrueFalseSwitch
+          v-else-if="props.type === 'boolean'"
+          :value="!!currentValue"
+          @update="updateValue"
+        />
 
         <!-- Data type 'material-list' -->
-        <multiselect v-else-if="props.type === 'material-list'" v-model="currentValue" class="configuration-multiselect"
-          :options="materials" :multiple="true" :taggable="true" :searchable="true" placeholder="Enter material name" />
+        <multiselect
+          v-else-if="props.type === 'material-list'"
+          v-model="currentValue"
+          class="configuration-multiselect"
+          :options="materials"
+          :multiple="true"
+          :taggable="true"
+          :searchable="true"
+          placeholder="Enter material name"
+        />
 
         <!-- Data type 'string-list' -->
-        <multiselect v-else-if="props.type === 'string-list'" v-model="currentValue" class="configuration-multiselect"
-          :options="[]" @tag="addValue" :multiple="true" :taggable="true" :searchable="true"
-          placeholder="Enter string" />
+        <multiselect
+          v-else-if="props.type === 'string-list'"
+          v-model="currentValue"
+          class="configuration-multiselect"
+          :options="[]"
+          @tag="addValue"
+          :multiple="true"
+          :taggable="true"
+          :searchable="true"
+          placeholder="Enter string"
+        />
 
         <!-- Data type 'itemstack' -->
-        <ItemStackPicker v-else-if="props.type === 'itemstack'" :value="currentValue" @update="updateValue" />
+        <ItemStackPicker
+          v-else-if="props.type === 'itemstack'"
+          :value="currentValue"
+          @update="updateValue"
+        />
 
         <div v-if="showDescription || error" id="task-configuration-row-info">
           <p v-if="error" class="error">A value is required.</p>
-          <p>{{ description }} <i>{{ note }}</i></p>
+          <p>
+            {{ description }} <i>{{ note }}</i>
+          </p>
         </div>
       </div>
     </div>

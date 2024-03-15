@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export type ZipLoaderStatus = 'inactive' | 'preparing' | 'compressing' | 'ready' | 'failed';
 
@@ -7,7 +7,7 @@ export const useExportStore = defineStore('export', {
     zip: {
       status: 'inactive' as ZipLoaderStatus,
       contents: null as Blob | null,
-    }
+    },
   }),
   getters: {
     getZipStatus: (state) => () => {
@@ -27,5 +27,5 @@ export const useExportStore = defineStore('export', {
     setZipContents(contents: Blob) {
       this.zip.contents = contents;
     },
-  }
+  },
 });

@@ -13,11 +13,13 @@ const showItemStackModal = ref(false);
 
 //TODO unshitify
 const empty = computed(() => {
-  return value.value === undefined
-    || value.value === null
-    || value.value === ''
-    || (Array.isArray(value.value) && value.value.length === 0)
-    || (typeof value.value === 'object' && Object.keys(value.value).length === 0);
+  return (
+    value.value === undefined ||
+    value.value === null ||
+    value.value === '' ||
+    (Array.isArray(value.value) && value.value.length === 0) ||
+    (typeof value.value === 'object' && Object.keys(value.value).length === 0)
+  );
 });
 const isQuestItem = computed(() => {
   return value.value?.['quest-item'] !== undefined;
@@ -27,16 +29,12 @@ const isItemStack = computed(() => {
     return false;
   }
 
-  const key = 'item' in value.value
-    ? 'item'
-    : 'type' in value.value
-      ? 'type'
-      : 'material'
+  const key = 'item' in value.value ? 'item' : 'type' in value.value ? 'type' : 'material';
 
-  return (!!value.value[key]);
+  return !!value.value[key];
 });
 const isMaterial = computed(() => {
-  return typeof value.value === 'string' && materials.includes(value.value)
+  return typeof value.value === 'string' && materials.includes(value.value);
 });
 
 const update = (newValue: any) => {
@@ -49,13 +47,19 @@ const update = (newValue: any) => {
 <template>
   <div class="itemstack" @click="showItemStackModal = true">
     <span v-if="empty" class="empty">ItemStack...</span>
-    <span v-if="isQuestItem" class="item"><font-awesome-icon :icon="['fas', 'tag']" /> Quest Item: {{
-    value['quest-item'] }}</span>
-    <span v-if="isItemStack" class="item"><font-awesome-icon :icon="['fas', 'cube']" /> ItemStack: {{ value.type ||
-    value.item || value.material }}</span>
-    <span v-if="isMaterial" class="item"><font-awesome-icon :icon="['fas', 'apple-whole']" /> {{ value }}</span>
-    <span v-if="!empty && !isQuestItem && !isItemStack && !isMaterial" class="invalid"><font-awesome-icon
-        :icon="['fas', 'triangle-exclamation']" /> Invalid ItemStack</span>
+    <span v-if="isQuestItem" class="item"
+      ><font-awesome-icon :icon="['fas', 'tag']" /> Quest Item: {{ value['quest-item'] }}</span
+    >
+    <span v-if="isItemStack" class="item"
+      ><font-awesome-icon :icon="['fas', 'cube']" /> ItemStack:
+      {{ value.type || value.item || value.material }}</span
+    >
+    <span v-if="isMaterial" class="item"
+      ><font-awesome-icon :icon="['fas', 'apple-whole']" /> {{ value }}</span
+    >
+    <span v-if="!empty && !isQuestItem && !isItemStack && !isMaterial" class="invalid"
+      ><font-awesome-icon :icon="['fas', 'triangle-exclamation']" /> Invalid ItemStack</span
+    >
   </div>
 
   <ItemStackModal v-model="showItemStackModal" :value="value" @confirm="update" />

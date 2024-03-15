@@ -5,7 +5,7 @@ import materials from '@/lib/materials';
 const model = defineModel();
 const emit = defineEmits(['confirm']);
 const props = defineProps<{
-  value: any
+  value: any;
 }>();
 const session = useSessionStore();
 
@@ -17,15 +17,14 @@ const isQuestItem = computed(() => {
 });
 const isItemStack = computed(() => {
   return (
-    typeof value.value === 'object'
-    && (
-      value.value?.item !== undefined
-      || value.value?.type !== undefined
-      || value.value?.material !== undefined
-    ))
+    typeof value.value === 'object' &&
+    (value.value?.item !== undefined ||
+      value.value?.type !== undefined ||
+      value.value?.material !== undefined)
+  );
 });
 const isMaterial = computed(() => {
-  return typeof value.value === 'string' && materials.includes(value.value)
+  return typeof value.value === 'string' && materials.includes(value.value);
 });
 
 const selectedType = ref(
@@ -46,13 +45,15 @@ const selectedQuestItem = computed({
     return value.value?.['quest-item'];
   },
   set(newValue: string) {
-    value.value = {}
+    value.value = {};
     if (newValue) {
       value.value['quest-item'] = newValue;
     }
-  }
-})
-const knownQuestItems = computed(() => { return session.session.items.map((item) => item.id) });
+  },
+});
+const knownQuestItems = computed(() => {
+  return session.session.items.map((item) => item.id);
+});
 
 const setSelectedType = (type: string) => {
   if (type === 'questitem') {
@@ -78,21 +79,33 @@ const confirm = () => {
 
     <template v-slot:body>
       <div id="type">
-        <span class="option" @click="setSelectedType('questitem')" :class="{ selected: selectedType === 'questitem' }">
+        <span
+          class="option"
+          @click="setSelectedType('questitem')"
+          :class="{ selected: selectedType === 'questitem' }"
+        >
           <span>
             <font-awesome-icon :icon="['fas', 'tag']" />
             Quest Item
           </span>
           <p v-if="noTypeSelected">Re-use a quest item.</p>
         </span>
-        <span class="option" @click="setSelectedType('itemstack')" :class="{ selected: selectedType === 'itemstack' }">
+        <span
+          class="option"
+          @click="setSelectedType('itemstack')"
+          :class="{ selected: selectedType === 'itemstack' }"
+        >
           <span>
             <font-awesome-icon :icon="['fas', 'cube']" />
             ItemStack
           </span>
           <p v-if="noTypeSelected">Define a new item stack.</p>
         </span>
-        <span class="option" @click="setSelectedType('material')" :class="{ selected: selectedType === 'material' }">
+        <span
+          class="option"
+          @click="setSelectedType('material')"
+          :class="{ selected: selectedType === 'material' }"
+        >
           <span>
             <font-awesome-icon :icon="['fas', 'apple-whole']" />
             Material
@@ -103,7 +116,12 @@ const confirm = () => {
 
       <div id="material" class="option-group" v-if="selectedType === 'material'">
         <label for="material">Material</label>
-        <multiselect v-model="value" :options="materials" :searchable="true" placeholder="Enter material name" />
+        <multiselect
+          v-model="value"
+          :options="materials"
+          :searchable="true"
+          placeholder="Enter material name"
+        />
         <p>Any items of this material will be matched.</p>
       </div>
 
@@ -113,8 +131,12 @@ const confirm = () => {
 
       <div id="quest-item" class="option-group" v-if="selectedType === 'questitem'">
         <label for="quest-item">Quest Item</label>
-        <multiselect v-model="selectedQuestItem" :options="knownQuestItems" :searchable="true"
-          placeholder="Enter quest item" />
+        <multiselect
+          v-model="selectedQuestItem"
+          :options="knownQuestItems"
+          :searchable="true"
+          placeholder="Enter quest item"
+        />
       </div>
 
       <div id="confirm" class="control-group">

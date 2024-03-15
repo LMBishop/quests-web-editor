@@ -33,8 +33,11 @@ const selected = computed(() => {
 <template>
   <div id="category-container" :class="{ selected: selected }">
     <span id="category-title" @click="setSelectedCategory">
-      <font-awesome-icon @click.stop="expandCategory" class="category-icon"
-        :icon="expanded ? ['fas', 'caret-down'] : ['fas', 'caret-up']" />
+      <font-awesome-icon
+        @click.stop="expandCategory"
+        class="category-icon"
+        :icon="expanded ? ['fas', 'caret-down'] : ['fas', 'caret-up']"
+      />
       <span id="category-name">
         <span id="category-display-name">{{ stripColorCodes(category.display.name) }}</span>
         <code id="category-display-id">{{ category.id }}</code>
@@ -42,7 +45,12 @@ const selected = computed(() => {
     </span>
   </div>
   <div v-if="expanded" id="quests">
-    <EditorSidebarQuest class="quest" v-for="quest in questsInCategory" :key="quest.id" :quest="quest" />
+    <EditorSidebarQuest
+      class="quest"
+      v-for="quest in questsInCategory"
+      :key="quest.id"
+      :quest="quest"
+    />
   </div>
 </template>
 

@@ -29,21 +29,39 @@ const addTask = (newId: string, newType: string) => {
 <template>
   <EditorOptionsPanel v-if="quest">
     <div id="options">
-      <h2>Tasks <code>({{ Object.keys(quest.tasks).length }})</code></h2>
+      <h2>
+        Tasks <code>({{ Object.keys(quest.tasks).length }})</code>
+      </h2>
 
-      <p v-if="Object.keys(quest.tasks).length === 0" class="error-text">This quest does not have any tasks.</p>
-      <EditorTaskConfiguration v-for="(task, taskId) in quest.tasks" :key="taskId" :taskId="String(taskId)"
-        :quest="quest" />
+      <p v-if="Object.keys(quest.tasks).length === 0" class="error-text">
+        This quest does not have any tasks.
+      </p>
+      <EditorTaskConfiguration
+        v-for="(task, taskId) in quest.tasks"
+        :key="taskId"
+        :taskId="String(taskId)"
+        :quest="quest"
+      />
 
       <div id="controls">
-        <Button id="add-task" :icon="['fas', 'plus']" type="solid" label="Add task" @click="showAddTaskModal = true" />
+        <Button
+          id="add-task"
+          :icon="['fas', 'plus']"
+          type="solid"
+          label="Add task"
+          @click="showAddTaskModal = true"
+        />
       </div>
     </div>
   </EditorOptionsPanel>
 
-  <EditorTaskModalCreate v-if="quest" v-model="showAddTaskModal" :questId="questId" @add="addTask" />
+  <EditorTaskModalCreate
+    v-if="quest"
+    v-model="showAddTaskModal"
+    :questId="questId"
+    @add="addTask"
+  />
 </template>
-
 
 <style scoped>
 #options {

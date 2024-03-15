@@ -5,14 +5,14 @@ const showModal = ref(false);
 
 const open = () => {
   showModal.value = true;
-}
+};
 
 const { canUseFsApi } = getBrowserCapabilities();
 const isUsingFsMode = computed(() => session.getSessionType() === 'filesystem');
 
 defineExpose({
-  open
-})
+  open,
+});
 </script>
 
 <template>
@@ -58,7 +58,9 @@ defineExpose({
 
           <div id="description">
             <p id="subtitle">Send to Server</p>
-            <p>Upload your quest configuration to the server, which can be downloaded and automatically applied in-game.
+            <p>
+              Upload your quest configuration to the server, which can be downloaded and
+              automatically applied in-game.
             </p>
             <p class="error">
               <font-awesome-icon :icon="['fas', 'xmark']" />

@@ -8,7 +8,7 @@ const showModal = ref(false);
 
 const open = () => {
   showModal.value = true;
-}
+};
 
 const confirm = () => {
   const quests = loadQuestsFromJson(testData.quests);
@@ -23,11 +23,11 @@ const confirm = () => {
   navigateToEditorPane(null);
 
   showModal.value = false;
-}
+};
 
 defineExpose({
-  open
-})
+  open,
+});
 </script>
 
 <template>
@@ -36,8 +36,10 @@ defineExpose({
       <h2>Import test data</h2>
     </template>
 
-    <p>You can view a demo of the Quests editor by loading test data. This will replace your current workspace.
-      Do you want to continue?</p>
+    <p>
+      You can view a demo of the Quests editor by loading test data. This will replace your current
+      workspace. Do you want to continue?
+    </p>
 
     <div id="controls" class="control-group">
       <Button :icon="['fas', 'xmark']" :label="'Cancel'" @click="showModal = false"></Button>

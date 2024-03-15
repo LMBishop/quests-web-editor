@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 import type { EditorCategory, EditorItem } from './session';
 
 export type FileSystemLoaderStatus = 'inactive' | 'pending' | 'loaded' | 'invalid' | 'valid';
@@ -11,7 +11,7 @@ export const useLoaderStore = defineStore('loader', {
       quests: [] as EditorQuest[],
       categories: [] as EditorCategory[],
       items: [] as EditorItem[],
-    }
+    },
   }),
   getters: {
     getFileSystemLoaderStatus: (state) => () => {
@@ -50,6 +50,6 @@ export const useLoaderStore = defineStore('loader', {
     },
     setItems(items: EditorItem[]) {
       this.fileSystem.items = items;
-    }
-  }
+    },
+  },
 });

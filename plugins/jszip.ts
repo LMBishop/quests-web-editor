@@ -1,5 +1,5 @@
-import JSZip from "jszip"
+import JSZip from 'jszip';
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(JSZip)
-})
+  nuxtApp.vueApp.use(JSZip);
+});

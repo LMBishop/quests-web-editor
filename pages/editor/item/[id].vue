@@ -2,8 +2,8 @@
 import { useSessionStore } from '@/stores/session';
 
 definePageMeta({
-  layout: 'editor'
-})
+  layout: 'editor',
+});
 
 const sessionStore = useSessionStore();
 const route = useRoute();
@@ -24,8 +24,7 @@ const item = sessionStore.getItemById(itemId);
     </span>
   </PageHeader>
 
-  <div id="options-container">
-  </div>
+  <div id="options-container"></div>
 </template>
 
 <style scoped>

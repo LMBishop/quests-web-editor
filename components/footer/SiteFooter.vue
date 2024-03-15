@@ -5,19 +5,17 @@ const runtimeConfig = useRuntimeConfig();
 
 <template>
   <footer id="footer">
-    <p id="copyright-license">
-      Released under the GPL-3.0 License.
-    </p>
+    <p id="copyright-license">Released under the GPL-3.0 License.</p>
     <p id="git-commit-hash">
       <font-awesome-icon :icon="['fas', 'code-branch']" />
       <NuxtLink to="https://github.com/LMBishop/quests-web-editor/">quests-web-editor</NuxtLink>
       <span>@</span>
-      <NuxtLink :to="`https://github.com/LMBishop/quests-web-editor/commit/${runtimeConfig.public.gitCommitHash}`">
+      <NuxtLink
+        :to="`https://github.com/LMBishop/quests-web-editor/commit/${runtimeConfig.public.gitCommitHash}`"
+      >
         {{ runtimeConfig.public.gitCommitHashShort }}
       </NuxtLink>
-      <span>
-        ({{ runtimeConfig.public.gitBranch }})
-      </span>
+      <span> ({{ runtimeConfig.public.gitBranch }}) </span>
     </p>
   </footer>
 </template>

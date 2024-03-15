@@ -15,7 +15,11 @@ const startExport = async () => {
 
   exportStore.setZipStatus('preparing');
 
-  const { transformedQuests, transformedCategories, transformedItems } = await prepareZip(quests, categories, items);
+  const { transformedQuests, transformedCategories, transformedItems } = await prepareZip(
+    quests,
+    categories,
+    items
+  );
 
   exportStore.setZipStatus('compressing');
 
@@ -25,20 +29,20 @@ const startExport = async () => {
     exportStore.setZipContents(blob);
     exportStore.setZipStatus('ready');
 
-    saveAs(blob, "quests.zip");
+    saveAs(blob, 'quests.zip');
   } catch {
     exportStore.setZipStatus('failed');
   }
-}
+};
 
 const open = () => {
   showModal.value = true;
-}
+};
 
 defineExpose({
   open,
-  startExport
-})
+  startExport,
+});
 </script>
 
 <template>

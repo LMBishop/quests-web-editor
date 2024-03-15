@@ -24,7 +24,9 @@ const unknownTaskType = computed(() => !knownTaskTypes.value.includes(newType.va
 const invalidTaskId = computed(() => !validateTaskId(newId.value));
 const duplicateTaskId = computed(() => knownTasks.value[newId.value] !== undefined);
 
-const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(newType.value)?.description);
+const newTypeDescription = computed(
+  () => session.getTaskDefinitionByTaskType(newType.value)?.description
+);
 </script>
 
 <template>
@@ -43,19 +45,26 @@ const newTypeDescription = computed(() => session.getTaskDefinitionByTaskType(ne
         </div>
         <div class="option-group">
           <label for="new-type">Task type</label>
-          <multiselect id="new-type" v-model="newType" :options="knownTaskTypes" :searchable="true"
-            placeholder="Select a new type"></multiselect>
+          <multiselect
+            id="new-type"
+            v-model="newType"
+            :options="knownTaskTypes"
+            :searchable="true"
+            placeholder="Select a new type"
+          ></multiselect>
           <p v-if="unknownTaskType" class="error-text">Invalid task type.</p>
         </div>
         <p v-if="newTypeDescription">{{ newTypeDescription }}</p>
         <p>A task ID must be unique, alphanumeric, and not contain any spaces.</p>
         <div id="confirm" class="control-group">
           <Button :icon="['fas', 'times']" :label="'Cancel'" @click="model = false"></Button>
-          <Button type="solid" :icon="['fas', 'check']" :label="'Confirm'"
+          <Button
+            type="solid"
+            :icon="['fas', 'check']"
+            :label="'Confirm'"
             :disabled="unknownTaskType || invalidTaskId || duplicateTaskId"
-            @click="emit('add', newId, newType)"></Button>
-
-
+            @click="emit('add', newId, newType)"
+          ></Button>
         </div>
       </div>
     </template>

@@ -18,8 +18,7 @@ const category = computed(() => {
     <div id="options">
       <h2>Quests in this category</h2>
       <p>Drag to reorder.</p>
-      <div class="option-group">
-      </div>
+      <div class="option-group"></div>
     </div>
   </EditorOptionsPanel>
 </template>

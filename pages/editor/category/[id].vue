@@ -2,8 +2,8 @@
 import { useSessionStore } from '@/stores/session';
 
 definePageMeta({
-  layout: 'editor'
-})
+  layout: 'editor',
+});
 
 const sessionStore = useSessionStore();
 const route = useRoute();

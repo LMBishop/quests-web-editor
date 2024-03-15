@@ -6,7 +6,7 @@ const showModal = ref(false);
 
 const open = () => {
   showModal.value = true;
-}
+};
 
 const confirm = () => {
   const categories = loader.getCategories();
@@ -21,7 +21,7 @@ const confirm = () => {
   navigateToEditorPane(null);
 
   showModal.value = false;
-}
+};
 
 const status = computed(() => loader.getFileSystemLoaderStatus());
 const questsCount = computed(() => loader.getQuests().length);
@@ -30,8 +30,8 @@ const itemsCount = computed(() => loader.getItems().length);
 const path = computed(() => loader.getPath());
 
 defineExpose({
-  open
-})
+  open,
+});
 </script>
 
 <template>
@@ -50,7 +50,10 @@ defineExpose({
     </div>
 
     <div v-if="status === 'loaded'">
-      <p>Parsing files in directory <code>{{ path }}</code>...</p>
+      <p>
+        Parsing files in directory <code>{{ path }}</code
+        >...
+      </p>
     </div>
 
     <div v-if="status === 'invalid'">
@@ -58,7 +61,10 @@ defineExpose({
     </div>
 
     <div v-if="status === 'valid'">
-      <p>Successfully parsed directory <code>{{ path }}</code>.</p>
+      <p>
+        Successfully parsed directory <code>{{ path }}</code
+        >.
+      </p>
       <ul>
         <li>{{ categoriesCount }} categories loaded</li>
         <li>{{ questsCount }} quests loaded</li>
@@ -69,8 +75,13 @@ defineExpose({
 
     <div id="controls" class="control-group">
       <Button :icon="['fas', 'xmark']" :label="'Cancel'" @click="showModal = false"></Button>
-      <Button v-if="status === 'valid'" type="solid" :icon="['fas', 'check']" :label="'Confirm'"
-        @click="confirm"></Button>
+      <Button
+        v-if="status === 'valid'"
+        type="solid"
+        :icon="['fas', 'check']"
+        :label="'Confirm'"
+        @click="confirm"
+      ></Button>
     </div>
   </Modal>
 </template>

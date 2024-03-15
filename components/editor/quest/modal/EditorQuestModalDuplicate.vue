@@ -17,7 +17,6 @@ const newQuestId = ref(props.questId);
 const isDuplicate = computed(() => {
   return session.getQuestById(newQuestId.value!) !== undefined;
 });
-
 </script>
 
 <template>
@@ -36,8 +35,13 @@ const isDuplicate = computed(() => {
         <p>A Quest ID must be unique, alphanumeric, and not contain any spaces.</p>
         <div id="confirm" class="control-group">
           <Button :icon="['fas', 'times']" :label="'Cancel'" @click="model = false"></Button>
-          <Button type="solid" :icon="['fas', 'check']" :label="'Duplicate'" :disabled="isDuplicate"
-            @click="emit('duplicate', newQuestId)"></Button>
+          <Button
+            type="solid"
+            :icon="['fas', 'check']"
+            :label="'Duplicate'"
+            :disabled="isDuplicate"
+            @click="emit('duplicate', newQuestId)"
+          ></Button>
         </div>
       </div>
     </template>

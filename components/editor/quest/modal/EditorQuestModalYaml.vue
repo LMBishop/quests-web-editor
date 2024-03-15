@@ -6,7 +6,7 @@ const emit = defineEmits(['delete']);
 const props = defineProps({
   questId: {
     required: true,
-    type: String
+    type: String,
   },
 });
 
@@ -18,16 +18,16 @@ const yamlString = ref('');
 const open = () => {
   const quest = session.getQuestById(props.questId);
   if (!quest) {
-    return
+    return;
   }
   const mappedObject = mapJsonQuestToYamlObject(quest);
   yamlString.value = stringify(mappedObject);
   showModal.value = true;
-}
+};
 
 defineExpose({
-  open
-})
+  open,
+});
 </script>
 
 <template>
@@ -36,12 +36,19 @@ defineExpose({
       <h2>YAML</h2>
     </template>
 
-    <p>YAML file for <code>{{ props.questId }}</code></p>
+    <p>
+      YAML file for <code>{{ props.questId }}</code>
+    </p>
 
     <textarea rows="20" :value="yamlString" readonly />
 
     <div id="confirm" class="control-group">
-      <Button type="solid" :icon="['fas', 'check']" :label="'Close'" @click="showModal = false"></Button>
+      <Button
+        type="solid"
+        :icon="['fas', 'check']"
+        :label="'Close'"
+        @click="showModal = false"
+      ></Button>
     </div>
   </Modal>
 </template>

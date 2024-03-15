@@ -3,7 +3,7 @@ const session = useSessionStore();
 
 const navigateHome = () => {
   navigateTo('/');
-}
+};
 
 const sessionType = computed(() => session.getSessionType());
 </script>
@@ -53,7 +53,6 @@ const sessionType = computed(() => session.getSessionType());
     font-size: 0.8rem;
     color: var(--color-header-text-mute);
   }
-
 }
 
 #logo {

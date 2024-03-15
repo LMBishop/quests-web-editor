@@ -9,24 +9,22 @@ export default defineNuxtConfig({
   modules: [
     // ...
     '@pinia/nuxt',
-    'nuxt-prepare'
+    'nuxt-prepare',
   ],
-  css: [
-    '@fortawesome/fontawesome-svg-core/styles.css'
-  ],
+  css: ['@fortawesome/fontawesome-svg-core/styles.css'],
   build: {
     transpile: [
-      "@fortawesome/vue-fontawesome",
-      "@fortawesome/fontawesome-svg-core",
-      "@fortawesome/free-solid-svg-icons",
-      "@fortawesome/free-regular-svg-icons",
+      '@fortawesome/vue-fontawesome',
+      '@fortawesome/fontawesome-svg-core',
+      '@fortawesome/free-solid-svg-icons',
+      '@fortawesome/free-regular-svg-icons',
     ],
   },
   runtimeConfig: {
     public: {
       gitCommitHash: process.env.GIT_COMMIT_HASH,
       gitCommitHashShort: process.env.GIT_COMMIT_HASH_SHORT,
-      gitBranch: process.env.GIT_BRANCH
-    }
-  }
-})
+      gitBranch: process.env.GIT_BRANCH,
+    },
+  },
+});

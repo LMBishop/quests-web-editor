@@ -6,7 +6,6 @@ defineProps({
   label: String,
   description: String,
 });
-
 </script>
 
 <template>
@@ -38,5 +37,4 @@ input {
 .checkbox {
   padding: 0 0 0 20px;
 }
-
 </style>

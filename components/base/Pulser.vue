@@ -12,7 +12,7 @@
   height: 100px;
   width: 100px;
 
-  >div {
+  > div {
     animation: growAndFade 3s infinite ease-out;
     background-color: var(--color-primary);
     border-radius: 50%;
@@ -37,7 +37,7 @@
 
 @keyframes growAndFade {
   0% {
-    opacity: .25;
+    opacity: 0.25;
     transform: scale(0);
   }
 

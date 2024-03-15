@@ -13,7 +13,7 @@ const props = defineProps({
   label: String,
   icon: {
     type: Array<String>,
-    required: false
+    required: false,
   },
   disabled: Boolean,
 });
@@ -28,8 +28,11 @@ const onClick = (event: MouseEvent) => {
 </script>
 
 <template>
-  <a id="button" :class="{ text: type === 'text', solid: type === 'solid', disabled: disabled, [accent]: true }"
-    @click.stop="onClick">
+  <a
+    id="button"
+    :class="{ text: type === 'text', solid: type === 'solid', disabled: disabled, [accent]: true }"
+    @click.stop="onClick"
+  >
     <font-awesome-icon :icon="icon" v-if="icon" />
     {{ label }}
   </a>
@@ -68,7 +71,7 @@ const onClick = (event: MouseEvent) => {
   color: var(--color-false);
 
   &:hover {
-    color: var(--color-false-hover)
+    color: var(--color-false-hover);
   }
 }
 

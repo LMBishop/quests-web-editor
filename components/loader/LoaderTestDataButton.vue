@@ -5,7 +5,7 @@ const testDataModal = ref<InstanceType<typeof LoaderTestDataModal> | null>(null)
 
 const openTestDataModal = async () => {
   testDataModal.value?.open();
-}
+};
 </script>
 
 <template>

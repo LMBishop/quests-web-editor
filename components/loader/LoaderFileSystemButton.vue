@@ -27,13 +27,18 @@ const openFileSystemPrompt = async () => {
     console.error(e);
     loaderStore.setFileSystemLoaderStatus('invalid');
   }
-}
+};
 </script>
 
 <template>
   <ClientOnly>
-    <Button type="solid" :icon="['fas', 'folder-open']" label="Load" @click="openFileSystemPrompt"
-      :disabled="!canUseFsApi" />
+    <Button
+      type="solid"
+      :icon="['fas', 'folder-open']"
+      label="Load"
+      @click="openFileSystemPrompt"
+      :disabled="!canUseFsApi"
+    />
 
     <LoaderFileSystemModal ref="fileSystemModal" />
   </ClientOnly>

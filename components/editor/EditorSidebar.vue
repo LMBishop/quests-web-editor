@@ -10,19 +10,27 @@ const currentType = ref('quests' as 'quests' | 'items');
 
 const setSelectedType = (type: 'quests' | 'items') => {
   currentType.value = type;
-}
+};
 </script>
 
 <template>
   <div id="sidebar-container">
     <div id="selector">
-      <span class="option" @click="setSelectedType('quests')" :class="{ selected: currentType === 'quests' }">
+      <span
+        class="option"
+        @click="setSelectedType('quests')"
+        :class="{ selected: currentType === 'quests' }"
+      >
         <span>
           <font-awesome-icon :icon="['far', 'compass']" />
           Quests
         </span>
       </span>
-      <span class="option" @click="setSelectedType('items')" :class="{ selected: currentType === 'items' }">
+      <span
+        class="option"
+        @click="setSelectedType('items')"
+        :class="{ selected: currentType === 'items' }"
+      >
         <span>
           <font-awesome-icon :icon="['fas', 'cubes']" />
           Items
@@ -30,13 +38,22 @@ const setSelectedType = (type: 'quests' | 'items') => {
       </span>
     </div>
     <div id="quests" v-if="currentType === 'quests'">
-      <EditorSidebarCategory v-for="category in session.categories" :key="category.id" :category="category" />
+      <EditorSidebarCategory
+        v-for="category in session.categories"
+        :key="category.id"
+        :category="category"
+      />
       <EditorSidebarQuest
-        v-for="quest in session.quests.filter((q) => (!session.categories.some((c) => c.id === q.options.category)))"
-        :key="quest.id" :quest="quest" />
-      <p id="count">{{ session.quests.length }} quest{{ session.quests.length === 1 ? '' : 's' }}, {{
-        session.categories.length }}
-        categor{{ session.categories.length === 1 ? 'y' : 'ies' }}</p>
+        v-for="quest in session.quests.filter(
+          (q) => !session.categories.some((c) => c.id === q.options.category)
+        )"
+        :key="quest.id"
+        :quest="quest"
+      />
+      <p id="count">
+        {{ session.quests.length }} quest{{ session.quests.length === 1 ? '' : 's' }},
+        {{ session.categories.length }} categor{{ session.categories.length === 1 ? 'y' : 'ies' }}
+      </p>
     </div>
     <div id="items" v-if="currentType === 'items'">
       <EditorSidebarItem v-for="item in session.items" :key="item.id" :item="item" />
@@ -88,7 +105,7 @@ const setSelectedType = (type: 'quests' | 'items') => {
         transition: color 0.3s;
 
         &:hover {
-          color: var(--color-text)
+          color: var(--color-text);
         }
       }
     }
@@ -105,7 +122,7 @@ const setSelectedType = (type: 'quests' | 'items') => {
     border-top: 1px solid var(--color-border);
     position: absolute;
     bottom: 0;
-    width: 100%
+    width: 100%;
   }
 
   #count {

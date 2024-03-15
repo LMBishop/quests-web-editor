@@ -2,8 +2,8 @@
 import LoaderDiscardSessionModal from '~/components/loader/LoaderDiscardSessionModal.vue';
 
 definePageMeta({
-  layout: 'default'
-})
+  layout: 'default',
+});
 
 const session = useSessionStore();
 
@@ -64,8 +64,17 @@ const discardSessionModal = ref<InstanceType<typeof LoaderDiscardSessionModal> |
           </div>
 
           <div id="button-group">
-            <Button :icon="['fas', 'arrow-left']" label="Return to Session" @click="navigateToEditorPane(null)" />
-            <Button accent="danger" :icon="['fas', 'trash']" label="Discard" @click="discardSessionModal?.open" />
+            <Button
+              :icon="['fas', 'arrow-left']"
+              label="Return to Session"
+              @click="navigateToEditorPane(null)"
+            />
+            <Button
+              accent="danger"
+              :icon="['fas', 'trash']"
+              label="Discard"
+              @click="discardSessionModal?.open"
+            />
           </div>
         </div>
       </div>

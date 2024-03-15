@@ -16,9 +16,7 @@ const selected = computed(() => {
   <div id="container" :class="{ selected: selected }">
     <span id="title" @click="setSelected">
       <font-awesome-icon class="icon" :icon="['fas', 'wrench']" />
-      <span id="name">
-        Configuration
-      </span>
+      <span id="name"> Configuration </span>
     </span>
   </div>
 </template>

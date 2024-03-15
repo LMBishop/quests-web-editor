@@ -6,7 +6,7 @@ const exportZipModal = ref<InstanceType<typeof ExportZipModal> | null>(null);
 const startZipExport = async () => {
   exportZipModal.value?.open();
   exportZipModal.value?.startExport();
-}
+};
 </script>
 
 <template>

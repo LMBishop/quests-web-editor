@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import { defineNuxtPrepareHandler } from 'nuxt-prepare/config'
+import { defineNuxtPrepareHandler } from 'nuxt-prepare/config';
 
 export default defineNuxtPrepareHandler(async () => {
   const gitCommitHash = execSync('git rev-parse HEAD').toString().trim();
@@ -11,12 +11,12 @@ export default defineNuxtPrepareHandler(async () => {
       public: {
         gitCommitHash: gitCommitHash,
         gitCommitHashShort: gitCommitHashShort,
-        gitBranch: gitBranch
-      }
+        gitBranch: gitBranch,
+      },
     },
 
     state: {
       foo: 'bar',
     },
-  }
-})
+  };
+});

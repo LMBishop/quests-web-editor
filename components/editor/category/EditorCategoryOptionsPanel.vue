@@ -17,9 +17,12 @@ const category = computed(() => {
   <EditorOptionsPanel v-if="category">
     <div id="options">
       <div class="option-group">
-        <Checkbox id="category-permissionrequired" label="Require permission for category"
+        <Checkbox
+          id="category-permissionrequired"
+          label="Require permission for category"
           description="Players must have permission to open and start quests in this category."
-          v-model="category.permissionRequired" />
+          v-model="category.permissionRequired"
+        />
       </div>
     </div>
   </EditorOptionsPanel>

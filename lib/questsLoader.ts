@@ -14,12 +14,17 @@ export function loadQuestsFromJson(config: any): EditorQuest[] {
         },
         type: quest.display.type,
       },
-      tasks: Object.fromEntries(Object.keys(quest.tasks).map((taskId: string) => {
-        return [taskId, {
-          id: taskId,
-          config: quest.tasks[taskId],
-        } as EditorTask];
-      })),
+      tasks: Object.fromEntries(
+        Object.keys(quest.tasks).map((taskId: string) => {
+          return [
+            taskId,
+            {
+              id: taskId,
+              config: quest.tasks[taskId],
+            } as EditorTask,
+          ];
+        })
+      ),
       rewards: quest.rewards,
       ...(quest.startcommands && { startCommands: quest.startcommands }),
       ...(quest.startstring && { startString: quest.startstring }),
@@ -42,9 +47,15 @@ export function loadQuestsFromJson(config: any): EditorQuest[] {
         },
         sortOrder: quest.options['sort-order'] || 0,
         autostart: quest.options.autostart || false,
-        ...(quest.options['completed-display'] && { completedDisplay: quest.options['completed-display'] }),
-        ...(quest.options['cooldown-display'] && { cooldownDisplay: quest.options['cooldown-display'] }),
-        ...(quest.options['permission-display'] && { permissionDisplay: quest.options['permission-display'] }),
+        ...(quest.options['completed-display'] && {
+          completedDisplay: quest.options['completed-display'],
+        }),
+        ...(quest.options['cooldown-display'] && {
+          cooldownDisplay: quest.options['cooldown-display'],
+        }),
+        ...(quest.options['permission-display'] && {
+          permissionDisplay: quest.options['permission-display'],
+        }),
         ...(quest.options['locked-display'] && { lockedDisplay: quest.options['locked-display'] }),
       },
     } as EditorQuest;
@@ -82,14 +93,16 @@ export function loadItemsFromJson(config: any): EditorItem[] {
 //TODO don't write fields if they're unchanged
 export function mapJsonQuestToYamlObject(quest: EditorQuest): any {
   return {
-    tasks: Object.fromEntries(Object.keys(quest.tasks).map((taskId: string) => {
-      return [taskId, quest.tasks[taskId].config]
-    })),
+    tasks: Object.fromEntries(
+      Object.keys(quest.tasks).map((taskId: string) => {
+        return [taskId, quest.tasks[taskId].config];
+      })
+    ),
     display: {
       name: quest.display.name,
-      "lore-normal": quest.display.lore.normal,
-      "lore-started": quest.display.lore.started,
-      type: quest.display.type
+      'lore-normal': quest.display.lore.normal,
+      'lore-started': quest.display.lore.started,
+      type: quest.display.type,
     },
     rewards: quest.rewards,
     ...(quest.startCommands && { startcommands: quest.startCommands }),
@@ -99,26 +112,28 @@ export function mapJsonQuestToYamlObject(quest: EditorQuest): any {
     options: {
       category: quest.options.category,
       requires: quest.options.requirements,
-      "permission-required": quest.options.permissionRequired,
+      'permission-required': quest.options.permissionRequired,
       cancellable: quest.options.cancellable,
-      "counts-towards-limit": quest.options.countsTowardsLimit,
+      'counts-towards-limit': quest.options.countsTowardsLimit,
       repeatable: quest.options.repeatable,
       cooldown: {
         enabled: quest.options.cooldown.enabled,
         time: quest.options.cooldown.time,
       },
-      "time-limit": {
+      'time-limit': {
         enabled: quest.options.timeLimit.enabled,
         time: quest.options.timeLimit.time,
       },
-      "sort-order": quest.options.sortOrder,
+      'sort-order': quest.options.sortOrder,
       autostart: quest.options.autostart || false,
       ...(quest.options.completedDisplay && { completedDisplay: quest.options.completedDisplay }),
       ...(quest.options.cooldownDisplay && { cooldownDisplay: quest.options.cooldownDisplay }),
-      ...(quest.options.permissionDisplay && { permissionDisplay: quest.options.permissionDisplay }),
+      ...(quest.options.permissionDisplay && {
+        permissionDisplay: quest.options.permissionDisplay,
+      }),
       ...(quest.options.lockedDisplay && { lockedDisplay: quest.options.lockedDisplay }),
     },
-  }
+  };
 }
 
 export function mapJsonCategoryToYamlObject(category: EditorCategory): any {
@@ -128,13 +143,13 @@ export function mapJsonCategoryToYamlObject(category: EditorCategory): any {
       type: category.display.type,
       lore: category.display.lore,
     },
-    "permission-required": category.permissionRequired,
-  }
+    'permission-required': category.permissionRequired,
+  };
 }
 
 export function mapJsonItemToYamlObject(item: EditorItem): any {
   return {
     type: item.type,
-    item: item.config
-  }
+    item: item.config,
+  };
 }

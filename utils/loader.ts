@@ -1,5 +1,5 @@
-import { parse } from "yaml";
-import { loadCategoriesFromJson, loadItemsFromJson, loadQuestsFromJson } from "~/lib/questsLoader";
+import { parse } from 'yaml';
+import { loadCategoriesFromJson, loadItemsFromJson, loadQuestsFromJson } from '~/lib/questsLoader';
 
 export async function openFileSystem() {
   try {
@@ -31,50 +31,57 @@ export async function enumerateQuestDirectory(dirHandle: any) {
     throw Error('invalid quest directory');
   }
 
-  const [questFiles, itemFiles] = await Promise.all([questsDirectory ? listAllFilesAndDirs(questsDirectory) : [], itemsDirectory ? listAllFilesAndDirs(itemsDirectory) : []]);
-  const [categories, quests, items] = await Promise.all([(async () => {
-    if (!categoryFile) {
-      return [];
-    }
+  const [questFiles, itemFiles] = await Promise.all([
+    questsDirectory ? listAllFilesAndDirs(questsDirectory) : [],
+    itemsDirectory ? listAllFilesAndDirs(itemsDirectory) : [],
+  ]);
+  const [categories, quests, items] = await Promise.all([
+    (async () => {
+      if (!categoryFile) {
+        return [];
+      }
 
-    const file: any = await categoryFile.getFile();
-    const text: string = await file.text();
-    const parsedYaml: any = parse(text);
-
-    return loadCategoriesFromJson(parsedYaml.categories);
-  })(),
-  (async () => {
-    if (!questFiles) {
-      return [];
-    }
-
-    const allQuests = await Promise.all(questFiles.filter(({ name, handle, kind }) => name.endsWith('.yml')).map(async ({ name, handle, kind }) => {
-      const file: any = await handle.getFile();
+      const file: any = await categoryFile.getFile();
       const text: string = await file.text();
-      return [
-        name.replace('.yml', ''),
-        parse(text)
-      ];
-    }))
+      const parsedYaml: any = parse(text);
 
-    return loadQuestsFromJson(Object.fromEntries(allQuests));
-  })(),
-  (async () => {
-    if (!itemFiles) {
-      return [];
-    }
+      return loadCategoriesFromJson(parsedYaml.categories);
+    })(),
+    (async () => {
+      if (!questFiles) {
+        return [];
+      }
 
-    const allItems = await Promise.all(itemFiles.filter(({ name, handle, kind }) => name.endsWith('.yml')).map(async ({ name, handle, kind }) => {
-      const file: any = await handle.getFile();
-      const text: string = await file.text();
-      return [
-        name.replace('.yml', ''),
-        parse(text)
-      ];
-    }))
+      const allQuests = await Promise.all(
+        questFiles
+          .filter(({ name, handle, kind }) => name.endsWith('.yml'))
+          .map(async ({ name, handle, kind }) => {
+            const file: any = await handle.getFile();
+            const text: string = await file.text();
+            return [name.replace('.yml', ''), parse(text)];
+          })
+      );
 
-    return loadItemsFromJson(Object.fromEntries(allItems));
-  })()]);
+      return loadQuestsFromJson(Object.fromEntries(allQuests));
+    })(),
+    (async () => {
+      if (!itemFiles) {
+        return [];
+      }
+
+      const allItems = await Promise.all(
+        itemFiles
+          .filter(({ name, handle, kind }) => name.endsWith('.yml'))
+          .map(async ({ name, handle, kind }) => {
+            const file: any = await handle.getFile();
+            const text: string = await file.text();
+            return [name.replace('.yml', ''), parse(text)];
+          })
+      );
+
+      return loadItemsFromJson(Object.fromEntries(allItems));
+    })(),
+  ]);
 
   return { categories, quests, items };
 }
@@ -84,7 +91,7 @@ async function listAllFilesAndDirs(dirHandle: any): Promise<any[]> {
   for await (const [name, handle] of dirHandle) {
     const { kind } = handle;
     if (handle.kind === 'directory') {
-      files.push(...await listAllFilesAndDirs(handle));
+      files.push(...(await listAllFilesAndDirs(handle)));
     } else {
       files.push({ name, handle, kind });
     }

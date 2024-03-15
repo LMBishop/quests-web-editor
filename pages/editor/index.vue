@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'editor'
-})
+  layout: 'editor',
+});
 </script>
 
 <template>
